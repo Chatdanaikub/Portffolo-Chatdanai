@@ -1,0 +1,1171 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>📖 Portfolio & Resume | ฉัตรดนัย สัตยากูล — 3D Book Experience</title>
+  <meta name="description" content="เปิดสมุด Portfolio & Resume ของ ฉัตรดนัย สัตยากูล (เอิร์ท) แบบ 3D Interactive Book Scroll — สไตล์อนิเมะญี่ปุ่น ริมหน้าต่างทุ่งนาเขียวๆ">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700;800;900&family=Noto+Serif+Thai:wght@400;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    /* ═══════════════════════════════════════════════════════
+       RESET & BASE
+    ═══════════════════════════════════════════════════════ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    :root {
+      --warm-cream: #fdf6e3;
+      --warm-amber: #d4a056;
+      --soft-brown: #8b6914;
+      --deep-green: #2d5016;
+      --leaf-green: #5a8a3c;
+      --sky-blue: #87ceeb;
+      --petal-pink: #f5c6d0;
+      --paper-white: #fefaf2;
+      --paper-shadow: rgba(60, 40, 10, 0.25);
+      --wood-brown: #6b4226;
+      --text-dark: #2c1810;
+      --text-body: #4a3728;
+      --accent-gold: #c7923e;
+      --book-spine: #3a2a1a;
+      --cover-color: #1a3a5c;
+      --cover-accent: #2a5a8c;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
+
+    body {
+      font-family: 'Prompt', sans-serif;
+      background: #0d1b0e;
+      color: var(--text-dark);
+      overflow-x: hidden;
+      cursor: default;
+    }
+
+    /* ═══════════════════════════════════════════════════════
+       FIXED BACKGROUND — ANIME MORNING WINDOW
+    ═══════════════════════════════════════════════════════ */
+    .world-bg {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .world-bg img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      filter: brightness(1.08) saturate(1.15);
+    }
+
+    /* Soft morning sun glow overlay */
+    .world-bg::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: 
+        radial-gradient(ellipse at 30% 20%, rgba(255, 220, 150, 0.35) 0%, transparent 60%),
+        radial-gradient(ellipse at 70% 80%, rgba(180, 220, 160, 0.2) 0%, transparent 50%);
+      pointer-events: none;
+    }
+
+    /* Floating cherry blossom petals */
+    .petals-container {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      z-index: 1;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .petal {
+      position: absolute;
+      width: 12px; height: 12px;
+      background: var(--petal-pink);
+      border-radius: 50% 0 50% 50%;
+      opacity: 0;
+      animation: petalFall linear infinite;
+      filter: drop-shadow(0 1px 2px rgba(200,100,130,0.3));
+    }
+
+    @keyframes petalFall {
+      0% { opacity: 0; transform: translate(0, -20px) rotate(0deg) scale(0.6); }
+      10% { opacity: 0.8; }
+      90% { opacity: 0.6; }
+      100% { opacity: 0; transform: translate(80px, 110vh) rotate(720deg) scale(0.3); }
+    }
+
+    /* ═══════════════════════════════════════════════════════
+       SCROLL CONTAINER — EACH "SCENE" IS 100VH
+    ═══════════════════════════════════════════════════════ */
+    .scroll-track {
+      position: relative;
+      z-index: 5;
+    }
+
+    /* ═══════════════════════════════════════════════════════
+       SCENE 0: INTRO — CLOSED BOOK ON DESK
+    ═══════════════════════════════════════════════════════ */
+    .scene {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      perspective: 1200px;
+    }
+
+    .scene-intro {
+      min-height: 120vh;
+      flex-direction: column;
+      gap: 30px;
+    }
+
+    .intro-text {
+      text-align: center;
+      z-index: 10;
+      animation: fadeInUp 1.2s ease-out 0.5s both;
+    }
+
+    .intro-text .greeting {
+      font-size: clamp(1rem, 3vw, 1.5rem);
+      font-weight: 400;
+      color: rgba(255,255,255,0.9);
+      text-shadow: 0 2px 20px rgba(0,0,0,0.5);
+      letter-spacing: 0.15em;
+      margin-bottom: 8px;
+    }
+
+    .intro-text h1 {
+      font-family: 'Noto Serif Thai', serif;
+      font-size: clamp(2.5rem, 7vw, 5rem);
+      font-weight: 700;
+      color: #fff;
+      text-shadow: 0 4px 30px rgba(0,0,0,0.6), 0 0 80px rgba(200,160,80,0.3);
+      line-height: 1.2;
+    }
+
+    .intro-text .subtitle {
+      font-size: clamp(0.85rem, 2vw, 1.1rem);
+      color: rgba(255,255,255,0.8);
+      margin-top: 12px;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+      font-weight: 300;
+    }
+
+    .scroll-hint {
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      color: rgba(255,255,255,0.7);
+      font-size: 0.85rem;
+      animation: bounceHint 2s ease-in-out infinite;
+      z-index: 10;
+    }
+
+    .scroll-hint .arrow {
+      width: 24px; height: 24px;
+      border-right: 2px solid rgba(255,255,255,0.7);
+      border-bottom: 2px solid rgba(255,255,255,0.7);
+      transform: rotate(45deg);
+    }
+
+    @keyframes bounceHint {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(12px); }
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ═══════════════════════════════════════════════════════
+       3D BOOK COMPONENT
+    ═══════════════════════════════════════════════════════ */
+    .book-3d-wrapper {
+      position: relative;
+      z-index: 10;
+      perspective: 1600px;
+      width: 100%;
+      max-width: 950px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    .book-3d {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16/10;
+      transform-style: preserve-3d;
+      transform: rotateX(8deg) rotateY(-5deg);
+      transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    /* Book Cover */
+    .book-cover {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border-radius: 4px 16px 16px 4px;
+      background: linear-gradient(135deg, var(--cover-color) 0%, var(--cover-accent) 50%, #1a4a6c 100%);
+      box-shadow: 
+        -6px 6px 20px rgba(0,0,0,0.5),
+        inset 0 0 40px rgba(255,255,255,0.05),
+        0 0 0 2px rgba(200,170,100,0.3);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      backface-visibility: hidden;
+      transform-origin: left center;
+      transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+      cursor: pointer;
+      overflow: hidden;
+      z-index: 20;
+    }
+
+    .book-cover::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0;
+      width: 18px; height: 100%;
+      background: linear-gradient(90deg, rgba(0,0,0,0.4) 0%, transparent 100%);
+    }
+
+    .book-cover .cover-title {
+      font-family: 'Noto Serif Thai', serif;
+      font-size: clamp(1.4rem, 4vw, 2.5rem);
+      font-weight: 700;
+      color: var(--warm-cream);
+      text-align: center;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.4);
+      margin-bottom: 10px;
+    }
+
+    .book-cover .cover-subtitle {
+      font-size: clamp(0.75rem, 1.5vw, 1rem);
+      color: rgba(253,246,227,0.7);
+      text-align: center;
+      font-weight: 300;
+    }
+
+    .book-cover .cover-line {
+      width: 60px; height: 2px;
+      background: var(--warm-amber);
+      margin: 16px 0;
+      border-radius: 2px;
+    }
+
+    .book-cover .cover-name {
+      font-size: clamp(1rem, 2.5vw, 1.5rem);
+      font-weight: 600;
+      color: var(--warm-amber);
+      text-shadow: 0 1px 4px rgba(0,0,0,0.3);
+    }
+
+    /* Book is "open" */
+    .book-3d.open .book-cover {
+      transform: rotateY(-160deg);
+      box-shadow: 5px 5px 15px rgba(0,0,0,0.3);
+    }
+
+    /* Page stack (inside the book) */
+    .book-pages-stack {
+      position: absolute;
+      width: 100%; height: 100%;
+      border-radius: 2px 12px 12px 2px;
+      background: linear-gradient(90deg, #e8dcc8, var(--paper-white) 8%, var(--paper-white));
+      box-shadow: 
+        -3px 4px 12px rgba(0,0,0,0.25),
+        inset 3px 0 15px rgba(100,80,40,0.1);
+      overflow: hidden;
+    }
+
+    /* Page edge effect (stack of pages) */
+    .book-pages-stack::after {
+      content: '';
+      position: absolute;
+      right: 0; top: 5%;
+      width: 4px; height: 90%;
+      background: repeating-linear-gradient(
+        to bottom,
+        #ddd4c0 0px, #ddd4c0 1px,
+        #f0e8d8 1px, #f0e8d8 3px
+      );
+      border-radius: 0 2px 2px 0;
+    }
+
+    /* Spine shadow */
+    .book-pages-stack::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0;
+      width: 25px; height: 100%;
+      background: linear-gradient(90deg, rgba(80,60,30,0.25), transparent);
+      z-index: 2;
+    }
+
+    /* ═══════════════════════════════════════════════════════
+       PAGE FLIPPER — INDIVIDUAL PAGES
+    ═══════════════════════════════════════════════════════ */
+    .scene-page {
+      min-height: 100vh;
+      padding: 40px 20px;
+    }
+
+    .page-container {
+      position: relative;
+      width: 100%;
+      max-width: 1000px;
+      margin: 0 auto;
+      perspective: 1400px;
+    }
+
+    .book-page {
+      position: relative;
+      width: 100%;
+      background: var(--paper-white);
+      border-radius: 4px 14px 14px 4px;
+      box-shadow:
+        0 8px 40px rgba(60, 40, 10, 0.3),
+        0 2px 10px rgba(60, 40, 10, 0.15),
+        inset 3px 0 20px rgba(100, 80, 40, 0.08);
+      overflow: hidden;
+      transform-style: preserve-3d;
+      transform: rotateX(2deg) rotateY(-2deg);
+      transition: transform 0.5s ease-out, box-shadow 0.5s ease-out;
+      opacity: 0;
+      animation: none;
+    }
+
+    .book-page.visible {
+      opacity: 1;
+      animation: pageAppear 0.8s ease-out both;
+    }
+
+    @keyframes pageAppear {
+      from {
+        opacity: 0;
+        transform: rotateX(15deg) rotateY(-20deg) translateY(60px) scale(0.92);
+      }
+      to {
+        opacity: 1;
+        transform: rotateX(2deg) rotateY(-2deg) translateY(0) scale(1);
+      }
+    }
+
+    /* Paper texture */
+    .book-page::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: 
+        url("data:image/svg+xml,%3Csvg width='100' height='100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100' height='100' filter='url(%23n)' opacity='.03'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* Spine fold shadow */
+    .book-page::after {
+      content: '';
+      position: absolute;
+      left: 0; top: 0;
+      width: 20px; height: 100%;
+      background: linear-gradient(90deg, rgba(80,60,30,0.15), transparent);
+      z-index: 2;
+    }
+
+    /* Page number ribbon */
+    .page-number {
+      position: absolute;
+      top: 20px; right: 24px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: rgba(100,80,50,0.5);
+      letter-spacing: 0.1em;
+      z-index: 3;
+    }
+
+    /* Page image content */
+    .page-image {
+      width: 100%;
+      display: block;
+      border-radius: 4px 14px 14px 4px;
+    }
+
+    /* Page label tag */
+    .page-tag {
+      position: absolute;
+      top: 16px; left: 30px;
+      background: rgba(26, 58, 92, 0.85);
+      color: var(--warm-cream);
+      padding: 5px 16px;
+      border-radius: 20px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      backdrop-filter: blur(8px);
+      z-index: 3;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+
+    /* ═══════════════════════════════════════════════════════
+       RESUME PAGE — SPECIAL STYLING
+    ═══════════════════════════════════════════════════════ */
+    .scene-resume .book-page {
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .resume-badge {
+      position: absolute;
+      top: -16px; left: 50%;
+      transform: translateX(-50%);
+      background: linear-gradient(135deg, var(--warm-amber), #e8b44a);
+      color: var(--text-dark);
+      padding: 8px 28px;
+      border-radius: 30px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      box-shadow: 0 4px 15px rgba(200,150,60,0.4);
+      z-index: 5;
+      white-space: nowrap;
+    }
+
+    /* ═══════════════════════════════════════════════════════
+       DOWNLOAD SECTION
+    ═══════════════════════════════════════════════════════ */
+    .scene-download {
+      min-height: 60vh;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .download-card {
+      background: rgba(253, 246, 227, 0.92);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(200, 170, 100, 0.4);
+      border-radius: 20px;
+      padding: 40px 50px;
+      text-align: center;
+      box-shadow: 0 12px 50px rgba(0,0,0,0.25);
+      z-index: 10;
+      max-width: 600px;
+      width: 90%;
+    }
+
+    .download-card h2 {
+      font-family: 'Noto Serif Thai', serif;
+      font-size: 1.6rem;
+      color: var(--text-dark);
+      margin-bottom: 8px;
+    }
+
+    .download-card p {
+      color: var(--text-body);
+      font-size: 0.9rem;
+      margin-bottom: 24px;
+    }
+
+    .download-btns {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .dl-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 30px;
+      border-radius: 14px;
+      font-family: 'Prompt', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      border: none;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .dl-btn-portfolio {
+      background: linear-gradient(135deg, var(--cover-color), var(--cover-accent));
+      color: var(--warm-cream);
+      box-shadow: 0 4px 20px rgba(26, 58, 92, 0.4);
+    }
+
+    .dl-btn-portfolio:hover {
+      transform: translateY(-3px) scale(1.03);
+      box-shadow: 0 8px 30px rgba(26, 58, 92, 0.5);
+    }
+
+    .dl-btn-resume {
+      background: linear-gradient(135deg, var(--warm-amber), #e8b44a);
+      color: var(--text-dark);
+      box-shadow: 0 4px 20px rgba(200, 150, 60, 0.3);
+    }
+
+    .dl-btn-resume:hover {
+      transform: translateY(-3px) scale(1.03);
+      box-shadow: 0 8px 30px rgba(200, 150, 60, 0.5);
+    }
+
+    .dl-btn-site {
+      background: rgba(45,80,22,0.9);
+      color: #e8f0d8;
+      box-shadow: 0 4px 20px rgba(45,80,22,0.3);
+    }
+
+    .dl-btn-site:hover {
+      transform: translateY(-3px) scale(1.03);
+      box-shadow: 0 8px 30px rgba(45,80,22,0.5);
+    }
+
+    .dl-btn svg {
+      width: 20px; height: 20px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    /* ═══════════════════════════════════════════════════════
+       FOOTER
+    ═══════════════════════════════════════════════════════ */
+    .book-footer {
+      position: relative;
+      z-index: 10;
+      text-align: center;
+      padding: 40px 20px 30px;
+      color: rgba(255,255,255,0.6);
+      font-size: 0.8rem;
+    }
+
+    .book-footer a {
+      color: var(--warm-amber);
+      text-decoration: none;
+    }
+
+    /* ═══════════════════════════════════════════════════════
+       NAVIGATION DOT SIDEBAR
+    ═══════════════════════════════════════════════════════ */
+    .page-nav {
+      position: fixed;
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      z-index: 100;
+    }
+
+    .page-nav-dot {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.35);
+      border: 1.5px solid rgba(255,255,255,0.5);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .page-nav-dot:hover {
+      background: rgba(255,255,255,0.7);
+      transform: scale(1.3);
+    }
+
+    .page-nav-dot.active {
+      background: var(--warm-amber);
+      border-color: var(--warm-amber);
+      box-shadow: 0 0 12px rgba(200,150,60,0.5);
+      transform: scale(1.3);
+    }
+
+    .page-nav-dot .tooltip {
+      position: absolute;
+      right: 22px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(30,20,10,0.85);
+      color: var(--warm-cream);
+      padding: 4px 12px;
+      border-radius: 6px;
+      font-size: 0.72rem;
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease;
+      backdrop-filter: blur(8px);
+    }
+
+    .page-nav-dot:hover .tooltip {
+      opacity: 1;
+    }
+
+    /* ═══════════════════════════════════════════════════════
+       PROGRESS BAR
+    ═══════════════════════════════════════════════════════ */
+    .progress-bar {
+      position: fixed;
+      top: 0; left: 0;
+      width: 0%;
+      height: 3px;
+      background: linear-gradient(90deg, var(--warm-amber), var(--petal-pink), var(--leaf-green));
+      z-index: 200;
+      transition: width 0.15s ease-out;
+    }
+
+    /* ═══════════════════════════════════════════════════════
+       PAGE SEPARATOR — DECORATIVE
+    ═══════════════════════════════════════════════════════ */
+    .page-separator {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      padding: 30px 0;
+      opacity: 0.5;
+    }
+
+    .page-separator .sep-line {
+      width: 60px; height: 1px;
+      background: rgba(255,255,255,0.3);
+    }
+
+    .page-separator .sep-dot {
+      width: 6px; height: 6px;
+      background: rgba(255,255,255,0.4);
+      border-radius: 50%;
+    }
+
+    /* ═══════════════════════════════════════════════════════
+       RESPONSIVE
+    ═══════════════════════════════════════════════════════ */
+    @media (max-width: 768px) {
+      .book-3d-wrapper {
+        padding: 10px;
+      }
+
+      .scene-page {
+        padding: 20px 10px;
+      }
+
+      .page-nav {
+        right: 8px;
+        gap: 8px;
+      }
+
+      .page-nav-dot {
+        width: 8px; height: 8px;
+      }
+
+      .download-card {
+        padding: 28px 24px;
+      }
+
+      .download-btns {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .dl-btn {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .book-cover .cover-title {
+        padding: 0 20px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .intro-text h1 {
+        font-size: 2rem;
+      }
+
+      .page-nav {
+        display: none;
+      }
+    }
+
+    /* ═══════════════════════════════════════════════════════
+       LIGHT RAY ANIMATION
+    ═══════════════════════════════════════════════════════ */
+    .light-rays {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      z-index: 2;
+      pointer-events: none;
+      overflow: hidden;
+      opacity: 0.4;
+    }
+
+    .light-ray {
+      position: absolute;
+      width: 200px;
+      height: 120vh;
+      background: linear-gradient(180deg, rgba(255,220,150,0.15) 0%, transparent 80%);
+      transform-origin: top center;
+      animation: rayFloat 8s ease-in-out infinite alternate;
+    }
+
+    @keyframes rayFloat {
+      from { transform: rotate(-5deg) translateX(-20px); opacity: 0.3; }
+      to { transform: rotate(5deg) translateX(20px); opacity: 0.6; }
+    }
+
+    /* ═══════════════════════════════════════════════════════
+       SECTION TITLE (between pages)
+    ═══════════════════════════════════════════════════════ */
+    .section-title-float {
+      text-align: center;
+      padding: 20px 0 10px;
+      z-index: 10;
+      position: relative;
+    }
+
+    .section-title-float h2 {
+      font-family: 'Noto Serif Thai', serif;
+      font-size: clamp(1.2rem, 3vw, 1.8rem);
+      font-weight: 700;
+      color: rgba(255,255,255,0.9);
+      text-shadow: 0 3px 20px rgba(0,0,0,0.5);
+    }
+
+    .section-title-float .st-sub {
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.6);
+      text-shadow: 0 2px 10px rgba(0,0,0,0.4);
+      margin-top: 4px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Progress Bar -->
+  <div class="progress-bar" id="progressBar"></div>
+
+  <!-- Fixed Background: Morning Window Scene -->
+  <div class="world-bg">
+    <img src="images/bg_morning_window.jpg" alt="Morning Window — Japanese Countryside" loading="eager">
+  </div>
+
+  <!-- Light Rays -->
+  <div class="light-rays" aria-hidden="true">
+    <div class="light-ray" style="left: 15%; animation-delay: 0s;"></div>
+    <div class="light-ray" style="left: 40%; animation-delay: 2s;"></div>
+    <div class="light-ray" style="left: 65%; animation-delay: 4s;"></div>
+  </div>
+
+  <!-- Floating Cherry Blossom Petals -->
+  <div class="petals-container" id="petalsContainer" aria-hidden="true"></div>
+
+  <!-- Page Navigation Dots -->
+  <nav class="page-nav" id="pageNav" aria-label="Page navigation">
+    <div class="page-nav-dot active" data-target="intro">
+      <span class="tooltip">หน้าปก</span>
+    </div>
+    <div class="page-nav-dot" data-target="portfolio-1">
+      <span class="tooltip">ปก Portfolio</span>
+    </div>
+    <div class="page-nav-dot" data-target="portfolio-2">
+      <span class="tooltip">สารบัญ</span>
+    </div>
+    <div class="page-nav-dot" data-target="portfolio-3">
+      <span class="tooltip">ข้อมูลส่วนตัว</span>
+    </div>
+    <div class="page-nav-dot" data-target="portfolio-4">
+      <span class="tooltip">การศึกษา</span>
+    </div>
+    <div class="page-nav-dot" data-target="portfolio-5">
+      <span class="tooltip">ประสบการณ์</span>
+    </div>
+    <div class="page-nav-dot" data-target="portfolio-6">
+      <span class="tooltip">ผลงาน 1</span>
+    </div>
+    <div class="page-nav-dot" data-target="portfolio-7">
+      <span class="tooltip">ผลงาน 2</span>
+    </div>
+    <div class="page-nav-dot" data-target="portfolio-8">
+      <span class="tooltip">ผลงาน 3</span>
+    </div>
+    <div class="page-nav-dot" data-target="portfolio-9">
+      <span class="tooltip">ทักษะ</span>
+    </div>
+    <div class="page-nav-dot" data-target="resume-1">
+      <span class="tooltip">Resume</span>
+    </div>
+    <div class="page-nav-dot" data-target="download">
+      <span class="tooltip">ดาวน์โหลด</span>
+    </div>
+  </nav>
+
+  <!-- Scroll Track -->
+  <div class="scroll-track">
+
+    <!-- ════ SCENE 0: INTRO ════ -->
+    <section class="scene scene-intro" id="intro">
+      <div class="intro-text">
+        <p class="greeting">✦ สวัสดีตอนเช้า ✦</p>
+        <h1>แฟ้มสะสมผลงาน</h1>
+        <p class="subtitle">ฉัตรดนัย สัตยากูล (เอิร์ท) — Video Editor & Content Creator</p>
+      </div>
+
+      <!-- 3D Book on Desk -->
+      <div class="book-3d-wrapper">
+        <div class="book-3d" id="book3d">
+          <div class="book-pages-stack"></div>
+          <div class="book-cover" id="bookCover" onclick="openBookAndScroll()">
+            <span class="cover-subtitle">VIDEO EDITING · CONTENT · DIGITAL WORK</span>
+            <div class="cover-line"></div>
+            <span class="cover-title">PORTFOLIO</span>
+            <div class="cover-line"></div>
+            <span class="cover-name">ฉัตรดนัย สัตยากูล</span>
+            <span class="cover-subtitle" style="margin-top:16px; font-size: 0.7rem; opacity:0.5;">▶ คลิกเพื่อเปิดสมุด</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="scroll-hint" id="scrollHint">
+        <span>เลื่อนลงเพื่อเปิดสมุด</span>
+        <div class="arrow"></div>
+      </div>
+    </section>
+
+    <!-- ════ PORTFOLIO PAGES ════ -->
+    <!-- Page 1: Cover -->
+    <div class="page-separator"><div class="sep-line"></div><div class="sep-dot"></div><div class="sep-line"></div></div>
+    <section class="scene scene-page" id="portfolio-1">
+      <div class="page-container">
+        <div class="book-page" data-page="1">
+          <span class="page-tag">PORTFOLIO · 01/09</span>
+          <img class="page-image" src="images/portfolio_pdf/portfolio_page_1.jpg" alt="Portfolio Page 1 — Cover" loading="lazy">
+        </div>
+      </div>
+    </section>
+
+    <!-- Page 2: Table of Contents -->
+    <div class="page-separator"><div class="sep-line"></div><div class="sep-dot"></div><div class="sep-line"></div></div>
+    <section class="scene scene-page" id="portfolio-2">
+      <div class="page-container">
+        <div class="book-page" data-page="2">
+          <span class="page-tag">สารบัญ · 02/09</span>
+          <img class="page-image" src="images/portfolio_pdf/portfolio_page_2.jpg" alt="Portfolio Page 2 — Contents" loading="lazy">
+        </div>
+      </div>
+    </section>
+
+    <!-- Page 3: Personal Info -->
+    <div class="page-separator"><div class="sep-line"></div><div class="sep-dot"></div><div class="sep-line"></div></div>
+    <section class="scene scene-page" id="portfolio-3">
+      <div class="page-container">
+        <div class="book-page" data-page="3">
+          <span class="page-tag">ข้อมูลส่วนตัว · 03/09</span>
+          <img class="page-image" src="images/portfolio_pdf/portfolio_page_3.jpg" alt="Portfolio Page 3 — Personal Info" loading="lazy">
+        </div>
+      </div>
+    </section>
+
+    <!-- Page 4: Education -->
+    <div class="page-separator"><div class="sep-line"></div><div class="sep-dot"></div><div class="sep-line"></div></div>
+    <section class="scene scene-page" id="portfolio-4">
+      <div class="page-container">
+        <div class="book-page" data-page="4">
+          <span class="page-tag">ประวัติการศึกษา · 04/09</span>
+          <img class="page-image" src="images/portfolio_pdf/portfolio_page_4.jpg" alt="Portfolio Page 4 — Education" loading="lazy">
+        </div>
+      </div>
+    </section>
+
+    <!-- Page 5: Work Experience -->
+    <div class="page-separator"><div class="sep-line"></div><div class="sep-dot"></div><div class="sep-line"></div></div>
+    <section class="scene scene-page" id="portfolio-5">
+      <div class="page-container">
+        <div class="book-page" data-page="5">
+          <span class="page-tag">ประสบการณ์ทำงาน · 05/09</span>
+          <img class="page-image" src="images/portfolio_pdf/portfolio_page_5.jpg" alt="Portfolio Page 5 — Experience" loading="lazy">
+        </div>
+      </div>
+    </section>
+
+    <!-- Page 6: Works 1 -->
+    <div class="page-separator"><div class="sep-line"></div><div class="sep-dot"></div><div class="sep-line"></div></div>
+    <div class="section-title-float">
+      <h2>✦ ผลงานระหว่างศึกษา ✦</h2>
+      <p class="st-sub">Works & Projects During Studies</p>
+    </div>
+    <section class="scene scene-page" id="portfolio-6">
+      <div class="page-container">
+        <div class="book-page" data-page="6">
+          <span class="page-tag">ผลงาน · 06/09</span>
+          <img class="page-image" src="images/portfolio_pdf/portfolio_page_6.jpg" alt="Portfolio Page 6 — Works 1" loading="lazy">
+        </div>
+      </div>
+    </section>
+
+    <!-- Page 7: Works 2 -->
+    <div class="page-separator"><div class="sep-line"></div><div class="sep-dot"></div><div class="sep-line"></div></div>
+    <section class="scene scene-page" id="portfolio-7">
+      <div class="page-container">
+        <div class="book-page" data-page="7">
+          <span class="page-tag">ผลงาน · 07/09</span>
+          <img class="page-image" src="images/portfolio_pdf/portfolio_page_7.jpg" alt="Portfolio Page 7 — Works 2" loading="lazy">
+        </div>
+      </div>
+    </section>
+
+    <!-- Page 8: Works 3 -->
+    <div class="page-separator"><div class="sep-line"></div><div class="sep-dot"></div><div class="sep-line"></div></div>
+    <section class="scene scene-page" id="portfolio-8">
+      <div class="page-container">
+        <div class="book-page" data-page="8">
+          <span class="page-tag">ผลงาน · 08/09</span>
+          <img class="page-image" src="images/portfolio_pdf/portfolio_page_8.jpg" alt="Portfolio Page 8 — Works 3" loading="lazy">
+        </div>
+      </div>
+    </section>
+
+    <!-- Page 9: Skills -->
+    <div class="page-separator"><div class="sep-line"></div><div class="sep-dot"></div><div class="sep-line"></div></div>
+    <section class="scene scene-page" id="portfolio-9">
+      <div class="page-container">
+        <div class="book-page" data-page="9">
+          <span class="page-tag">ทักษะ & โปรแกรม · 09/09</span>
+          <img class="page-image" src="images/portfolio_pdf/portfolio_page_9.jpg" alt="Portfolio Page 9 — Skills" loading="lazy">
+        </div>
+      </div>
+    </section>
+
+    <!-- ════ RESUME ════ -->
+    <div class="page-separator"><div class="sep-line"></div><div class="sep-dot"></div><div class="sep-line"></div></div>
+    <div class="section-title-float">
+      <h2>📄 Resume — ประวัติย่อ</h2>
+      <p class="st-sub">Chatdanai Sattayakun</p>
+    </div>
+    <section class="scene scene-page scene-resume" id="resume-1">
+      <div class="page-container">
+        <div class="book-page" data-page="resume" style="position:relative;">
+          <div class="resume-badge">📋 RESUME — ฉัตรดนัย สัตยากูล</div>
+          <img class="page-image" src="images/portfolio_pdf/resume_page_1.jpg" alt="Resume — ฉัตรดนัย สัตยากูล" loading="lazy">
+        </div>
+      </div>
+    </section>
+
+    <!-- ════ DOWNLOAD & LINKS ════ -->
+    <div class="page-separator"><div class="sep-line"></div><div class="sep-dot"></div><div class="sep-line"></div></div>
+    <section class="scene scene-download" id="download">
+      <div class="download-card">
+        <h2>📥 ดาวน์โหลดเอกสาร</h2>
+        <p>ดาวน์โหลดไฟล์ Portfolio และ Resume ฉบับเต็ม หรือเข้าชมเว็บไซต์หลักพร้อมผลงานวิดีโอ</p>
+        <div class="download-btns">
+          <a href="Portfolio_TH.pdf" download class="dl-btn dl-btn-portfolio">
+            <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Portfolio (PDF)
+          </a>
+          <a href="Resume_TH.pdf" download class="dl-btn dl-btn-resume">
+            <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Resume (PDF)
+          </a>
+          <a href="/" class="dl-btn dl-btn-site">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            เว็บไซต์หลัก
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="book-footer">
+      <p>© 2026 ฉัตรดนัย สัตยากูล (เอิร์ท) · คณะนิเทศศาสตร์ ม.ธุรกิจบัณฑิตย์ · <a href="mailto:chatdanaisattayakun@gmail.com">chatdanaisattayakun@gmail.com</a></p>
+    </footer>
+
+  </div>
+
+  <script>
+    // ═══════════════════════════════════════════════════════
+    //  CHERRY BLOSSOM PETALS
+    // ═══════════════════════════════════════════════════════
+    (function createPetals() {
+      const container = document.getElementById('petalsContainer');
+      const count = window.innerWidth < 600 ? 15 : 30;
+      for (let i = 0; i < count; i++) {
+        const petal = document.createElement('div');
+        petal.classList.add('petal');
+        petal.style.left = Math.random() * 100 + '%';
+        petal.style.top = -(Math.random() * 20 + 5) + '%';
+        petal.style.animationDuration = (8 + Math.random() * 12) + 's';
+        petal.style.animationDelay = (Math.random() * 15) + 's';
+        petal.style.width = (8 + Math.random() * 8) + 'px';
+        petal.style.height = petal.style.width;
+        // Random petal colors
+        const colors = ['#f5c6d0', '#fce4ec', '#f8bbd0', '#ffccbc', '#fff9c4'];
+        petal.style.background = colors[Math.floor(Math.random() * colors.length)];
+        container.appendChild(petal);
+      }
+    })();
+
+    // ═══════════════════════════════════════════════════════
+    //  BOOK OPEN ANIMATION
+    // ═══════════════════════════════════════════════════════
+    let bookOpened = false;
+
+    function openBookAndScroll() {
+      if (bookOpened) return;
+      bookOpened = true;
+      const book = document.getElementById('book3d');
+      book.classList.add('open');
+      // Scroll to first portfolio page after animation
+      setTimeout(() => {
+        document.getElementById('portfolio-1').scrollIntoView({ behavior: 'smooth' });
+      }, 800);
+    }
+
+    // Auto-open book on scroll past intro
+    const introSection = document.getElementById('intro');
+    const introObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting && !bookOpened) {
+          openBookAndScroll();
+        }
+      });
+    }, { threshold: 0.3 });
+    introObserver.observe(introSection);
+
+    // ═══════════════════════════════════════════════════════
+    //  PAGE REVEAL ON SCROLL (Intersection Observer)
+    // ═══════════════════════════════════════════════════════
+    const pageObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
+
+    document.querySelectorAll('.book-page').forEach(page => {
+      pageObserver.observe(page);
+    });
+
+    // ═══════════════════════════════════════════════════════
+    //  3D TILT ON MOUSE MOVE (for pages)
+    // ═══════════════════════════════════════════════════════
+    if (window.innerWidth > 768) {
+      document.querySelectorAll('.page-container').forEach(container => {
+        container.addEventListener('mousemove', (e) => {
+          const rect = container.getBoundingClientRect();
+          const x = (e.clientX - rect.left) / rect.width - 0.5;
+          const y = (e.clientY - rect.top) / rect.height - 0.5;
+          const page = container.querySelector('.book-page');
+          if (page && page.classList.contains('visible')) {
+            page.style.transform = `rotateX(${-y * 6}deg) rotateY(${x * 6}deg)`;
+          }
+        });
+        container.addEventListener('mouseleave', () => {
+          const page = container.querySelector('.book-page');
+          if (page) {
+            page.style.transform = 'rotateX(2deg) rotateY(-2deg)';
+          }
+        });
+      });
+    }
+
+    // ═══════════════════════════════════════════════════════
+    //  PROGRESS BAR
+    // ═══════════════════════════════════════════════════════
+    const progressBar = document.getElementById('progressBar');
+    window.addEventListener('scroll', () => {
+      const scrollTop = document.documentElement.scrollTop;
+      const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const progress = (scrollTop / scrollHeight) * 100;
+      progressBar.style.width = progress + '%';
+    }, { passive: true });
+
+    // ═══════════════════════════════════════════════════════
+    //  PAGE NAV DOTS — ACTIVE STATE + CLICK NAVIGATION
+    // ═══════════════════════════════════════════════════════
+    const navDots = document.querySelectorAll('.page-nav-dot');
+    
+    // Click to scroll
+    navDots.forEach(dot => {
+      dot.addEventListener('click', () => {
+        const targetId = dot.getAttribute('data-target');
+        const target = document.getElementById(targetId);
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      });
+    });
+
+    // Update active dot on scroll
+    const allSections = document.querySelectorAll('[id]');
+    const dotTargets = Array.from(navDots).map(d => d.getAttribute('data-target'));
+    
+    const navObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const id = entry.target.getAttribute('id');
+          if (dotTargets.includes(id)) {
+            navDots.forEach(d => d.classList.remove('active'));
+            const activeDot = document.querySelector(`.page-nav-dot[data-target="${id}"]`);
+            if (activeDot) activeDot.classList.add('active');
+          }
+        }
+      });
+    }, { threshold: 0.3 });
+
+    dotTargets.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) navObserver.observe(el);
+    });
+
+    // ═══════════════════════════════════════════════════════
+    //  PARALLAX: SUBTLE BG SHIFT ON SCROLL
+    // ═══════════════════════════════════════════════════════
+    const worldBg = document.querySelector('.world-bg img');
+    window.addEventListener('scroll', () => {
+      const scrollY = window.scrollY;
+      const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+      const percent = scrollY / maxScroll;
+      // Subtle vertical parallax for the background
+      worldBg.style.transform = `scale(1.1) translateY(${percent * -8}%)`;
+    }, { passive: true });
+
+    // ═══════════════════════════════════════════════════════
+    //  HIDE SCROLL HINT AFTER FIRST SCROLL
+    // ═══════════════════════════════════════════════════════
+    let hintHidden = false;
+    window.addEventListener('scroll', () => {
+      if (!hintHidden && window.scrollY > 100) {
+        hintHidden = true;
+        const hint = document.getElementById('scrollHint');
+        if (hint) {
+          hint.style.transition = 'opacity 0.5s ease';
+          hint.style.opacity = '0';
+        }
+      }
+    }, { passive: true });
+  </script>
+
+</body>
+</html>

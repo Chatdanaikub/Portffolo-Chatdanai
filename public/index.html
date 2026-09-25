@@ -1,0 +1,1466 @@
+<!DOCTYPE html>
+<html lang="th" data-theme="sapphire">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PORTFOLIO | ฉัตรดนัย สัตยากูล (เอิร์ท) — Video Editor & Media Developer</title>
+  <meta name="description" content="แฟ้มสะสมผลงาน (Portfolio) ฉัตรดนัย สัตยากูล (เอิร์ท) คณะนิเทศศาสตร์ ม.ธุรกิจบัณฑิตย์ ยื่นฝึกงาน Video Editor, Motion Designer & IT Developer">
+  
+  <!-- Google Fonts: Prompt -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Prompt:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet">
+  
+  <!-- CSS Stylesheets -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/animations.css">
+
+  <!-- Google Model-Viewer 3D Web Component -->
+  <script type="module" src="js/model-viewer.min.js"></script>
+</head>
+<body>
+  <!-- Ambient Lighting Effects -->
+  <div class="ambient-glow orb-1" aria-hidden="true"></div>
+  <div class="ambient-glow orb-2" aria-hidden="true"></div>
+  <div class="ambient-glow orb-3" aria-hidden="true"></div>
+  <div class="mouse-glow" id="mouseGlow" aria-hidden="true"></div>
+
+  <!-- Top Navigation Bar -->
+  <header class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="#hero" class="brand-logo" id="brandLogo">
+        <span class="logo-icon">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5">
+            <polygon points="5 3 19 12 5 21 5 3"></polygon>
+          </svg>
+        </span>
+        <span class="logo-text">CHATDANAI<span class="highlight">.S</span></span>
+        <span class="logo-status-dot" title="พร้อมเริ่มฝึกงานทันที"></span>
+      </a>
+
+      <nav class="nav-links" id="navLinks">
+        <a href="#hero" class="nav-link active" data-section="hero"><span>หน้าแรก</span></a>
+        <a href="#toc" class="nav-link" data-section="toc"><span>02 สารบัญ</span></a>
+        <a href="#about" class="nav-link" data-section="about"><span>03 ข้อมูลส่วนตัว</span></a>
+        <a href="#education" class="nav-link" data-section="education"><span>04 การศึกษา</span></a>
+        <a href="#ext-works" class="nav-link" data-section="ext-works"><span>05 งาน Dev & IT</span></a>
+        <a href="#works" class="nav-link" data-section="works"><span>06-08 ผลงานวิดีโอ</span></a>
+        <a href="#model3d" class="nav-link" data-section="model3d"><span>โมเดล 3D</span></a>
+        <a href="#skills" class="nav-link" data-section="skills"><span>09 ทักษะ</span></a>
+        <a href="#contact" class="nav-link" data-section="contact"><span>ติดต่อ</span></a>
+      </nav>
+
+      <div class="nav-controls">
+        <!-- Quick Access PDF Buttons -->
+        <button class="nav-quick-btn pdf-btn" onclick="openPdfFlipbook(1, 'portfolio');" title="เปิดดูพอร์ตโฟลิโอฉบับเต็ม 9 หน้า">
+          <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+            <polyline points="14 2 14 8 20 8"></polyline>
+          </svg>
+          <span>พอร์ต 9 หน้า</span>
+        </button>
+
+        <button class="nav-quick-btn resume-btn" onclick="openPdfFlipbook(1, 'resume');" title="เปิดดูเรซูเม่">
+          <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+            <circle cx="8.5" cy="7" r="4"></circle>
+          </svg>
+          <span>เรซูเม่</span>
+        </button>
+
+        <!-- Audio SFX Toggle -->
+        <button class="icon-btn sfx-btn" id="sfxToggleBtn" aria-label="เปิด/ปิดเสียงเอฟเฟกต์" title="เสียงอินเตอร์แอคทีฟ (เปิด/ปิด)">
+          <svg class="sfx-icon-on" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+            <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+            <path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
+          </svg>
+          <svg class="sfx-icon-off" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" style="display:none;">
+            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+            <line x1="23" y1="9" x2="17" y2="15"></line>
+            <line x1="17" y1="9" x2="23" y2="15"></line>
+          </svg>
+        </button>
+
+        <!-- Mobile Menu Toggle -->
+        <button class="icon-btn mobile-menu-btn" id="mobileMenuBtn" aria-label="เมนูนำทาง">
+          <span class="hamburger-bar"></span>
+          <span class="hamburger-bar"></span>
+          <span class="hamburger-bar"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer Menu -->
+  <div class="mobile-drawer" id="mobileDrawer">
+    <div class="drawer-content">
+      <nav class="drawer-nav">
+        <a href="#hero" class="drawer-link">🏠 หน้าแรก (Cover)</a>
+        <a href="#toc" class="drawer-link">📋 02 สารบัญ (Contents)</a>
+        <a href="#about" class="drawer-link">👤 03 ข้อมูลส่วนตัว (Profile)</a>
+        <a href="#education" class="drawer-link">🎓 04 ประวัติการศึกษา (Education)</a>
+        <a href="#ext-works" class="drawer-link">💻 05 ประสบการณ์นอก ม. (Dev & IT)</a>
+        <a href="#works" class="drawer-link">🎬 06–08 ผลงานระหว่างศึกษา (Media & Video)</a>
+        <a href="#model3d" class="drawer-link">🧊 ไฮไลต์ โมเดล 3D ห้องนอน (Blender)</a>
+        <a href="#skills" class="drawer-link">🛠️ 09 ทักษะและโปรแกรมที่ใช้งาน (Skills)</a>
+        <a href="#contact" class="drawer-link">✉️ ช่องทางติดต่อ & นัดสัมภาษณ์</a>
+      </nav>
+    </div>
+  </div>
+
+  <main>
+    <!-- HERO SECTION (MATCHING PORTFOLIO_TH.PDF COVER PAGE 1) -->
+    <section class="hero-section hero-dribbble-3d" id="hero">
+      <div class="hero-stage-grid">
+        <!-- LEFT COLUMN: COVER TITLES & CANDIDATE PROFILE -->
+        <div class="hud-profile-col animate-fade-up">
+          <!-- Top Letter-spaced Category Pill (Page 1) -->
+          <div class="portfolio-category-pill">
+            <span>VIDEO EDITING &nbsp;·&nbsp; CONTENT &nbsp;·&nbsp; DIGITAL WORK</span>
+          </div>
+
+          <!-- Hero Main Title Group (Page 1) -->
+          <div class="portfolio-cover-title-group">
+            <span class="portfolio-cover-th">แฟ้มสะสมผลงาน</span>
+            <h1 class="portfolio-cover-en">PORTFOLIO</h1>
+            <div class="portfolio-cover-name">
+              ฉัตรดนัย สัตยากูล <span class="nickname-tag">(เอิร์ท)</span>
+            </div>
+            <div class="portfolio-cover-role">
+              ตัดต่อวิดีโอและสร้างสรรค์คอนเทนต์
+            </div>
+          </div>
+
+          <!-- University Status Badge (Page 1 & 4) -->
+          <div class="portfolio-cover-status">
+            <span class="radar-dot"></span>
+            <span>กำลังศึกษาระดับปริญญาตรี คณะนิเทศศาสตร์ มหาวิทยาลัยธุรกิจบัณฑิตย์ (DPU)</span>
+            <span style="opacity:0.35;">•</span>
+            <span style="color:#22c55e; font-weight:600;">พร้อมเริ่มฝึกงานทันที</span>
+          </div>
+
+          <!-- Candidate Introduction -->
+          <div class="hud-intro-card glass-panel">
+            <div class="hud-corner tl"></div>
+            <div class="hud-corner tr"></div>
+            <div class="hud-corner bl"></div>
+            <div class="hud-corner br"></div>
+            <p class="hud-intro-text">
+              สวัสดีครับ ผม <strong>ฉัตรดนัย สัตยากูล (เอิร์ท)</strong> มุ่งมั่นยื่นฝึกงานในตำแหน่ง 
+              <span class="hud-text-glow">Video Editor & Content Creator</span> ผสานความเชี่ยวชาญด้านการตัดต่อวิดีโอ, โมชันกราฟิก, การพัฒนาโปรแกรม และการประยุกต์ใช้ AI ในการทำงานจริง พร้อมเริ่มฝึกงานทันทีครับ
+            </p>
+          </div>
+
+          <!-- Action Buttons Row -->
+          <div class="hud-action-buttons">
+            <button class="btn btn-primary btn-glow" onclick="openPdfFlipbook(1, 'portfolio');">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                <polyline points="14 2 14 8 20 8"></polyline>
+                <line x1="16" y1="13" x2="8" y2="13"></line>
+                <line x1="16" y1="17" x2="8" y2="17"></line>
+              </svg>
+              <span>เปิดดูพอร์ต (PDF 9 หน้า)</span>
+            </button>
+
+            <button class="btn btn-secondary" onclick="openPdfFlipbook(1, 'resume');">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                <circle cx="8.5" cy="7" r="4"></circle>
+                <line x1="20" y1="8" x2="20" y2="14"></line>
+                <line x1="23" y1="11" x2="17" y2="11"></line>
+              </svg>
+              <span>ดูเรซูเม่ (Resume 1 หน้า)</span>
+            </button>
+
+            <a href="#works" class="btn btn-outline">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+                <polygon points="5 3 19 12 5 21 5 3"></polygon>
+              </svg>
+              <span>ชมผลงานวิดีโอ</span>
+            </a>
+
+            <a href="#contact" class="btn btn-outline">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+              </svg>
+              <span>ติดต่อนัดสัมภาษณ์</span>
+            </a>
+          </div>
+
+          <!-- Quick Telemetry Specs Ticker -->
+          <div class="hud-stats-ticker">
+            <div class="ticker-chip">
+              <span class="chip-num">09 หน้า</span>
+              <span class="chip-label">แฟ้มสะสมผลงานสมบูรณ์</span>
+            </div>
+            <div class="ticker-chip">
+              <span class="chip-num">10+</span>
+              <span class="chip-label">วิดีโอ & คอนเทนต์</span>
+            </div>
+            <div class="ticker-chip">
+              <span class="chip-num">Global</span>
+              <span class="chip-label">BuiltByBit & Blissful</span>
+            </div>
+            <div class="ticker-chip">
+              <span class="chip-num">3D</span>
+              <span class="chip-label">Blender 5.x</span>
+            </div>
+            <div class="ticker-chip">
+              <span class="chip-num">Ready</span>
+              <span class="chip-label">พร้อมเริ่มฝึกงานทันที</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- RIGHT COLUMN: DUAL SHOWCASE (FORMAL SUIT PORTRAIT & INTERACTIVE 3D BEDROOM MODEL) -->
+        <div class="hud-stage-col animate-fade-down">
+          <div class="hud-3d-frame glass-panel" id="hud3dFrame">
+            <!-- Frame Header Bar with View Switcher -->
+            <div class="hud-frame-header">
+              <div class="hud-header-left">
+                <span class="hud-bracket">[</span>
+                <span class="hud-status-indicator">● LIVE 3D ENGINE</span>
+                <span class="hud-title-code" id="heroStageTitle">BLENDER ISOMETRIC BEDROOM 3D</span>
+                <span class="hud-bracket">]</span>
+              </div>
+              <div class="hud-view-switcher">
+                <button class="view-switch-btn active" id="btnView3D" onclick="switchHeroView('3d');" title="โมเดล 3D ห้องนอนหมุนตามการเลื่อนเว็บ">
+                  <span>🧊 โมเดล 3D ห้องนอน</span>
+                </button>
+                <button class="view-switch-btn" id="btnViewPhoto" onclick="switchHeroView('photo');" title="ดูภาพถ่ายโปรไฟล์ตัวจริงจากหน้า 1">
+                  <span>👤 ภาพโปรไฟล์ตัวจริง</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Viewport Wrapper -->
+            <div class="hud-viewport-wrapper">
+              <div class="hud-corner-bracket tl"></div>
+              <div class="hud-corner-bracket tr"></div>
+              <div class="hud-corner-bracket bl"></div>
+              <div class="hud-corner-bracket br"></div>
+
+              <!-- 3D MODEL-VIEWER CANVAS (Default Active: Rotates as you scroll the webpage) -->
+              <div class="hero-3d-view-box" id="heroModelBox">
+                <model-viewer
+                  id="bedroomViewer"
+                  src="models/bedroom.glb"
+                  poster="models/bedroom_poster.jpg"
+                  alt="Cozy Futuristic Bedroom 3D Model by Chatdanai in Blender"
+                  camera-controls
+                  camera-orbit="135deg 55deg auto"
+                  min-camera-orbit="auto 15deg 5%"
+                  max-camera-orbit="auto 90deg 300%"
+                  shadow-intensity="1.2"
+                  shadow-softness="0.75"
+                  exposure="0.9"
+                  environment-image="neutral"
+                  interaction-prompt="auto"
+                  touch-action="pan-y"
+                  loading="eager"
+                  class="interactive-model-canvas">
+                  
+                  <!-- Hotspot 1: Workstation -->
+                  <button class="hud-hotspot-pin" slot="hotspot-workstation" data-position="-0.6 0.9 0.4" data-normal="0 1 0">
+                    <span class="hotspot-pulse"></span>
+                    <span class="hotspot-icon">🖥️</span>
+                    <div class="hotspot-tooltip">
+                      <strong>Workstation</strong>
+                      <span>Premiere Pro, AE & Code</span>
+                    </div>
+                  </button>
+
+                  <!-- Hotspot 2: Bed / Creative Lounge -->
+                  <button class="hud-hotspot-pin" slot="hotspot-bed" data-position="0.5 0.6 -0.3" data-normal="0 1 0">
+                    <span class="hotspot-pulse"></span>
+                    <span class="hotspot-icon">🛏️</span>
+                    <div class="hotspot-tooltip">
+                      <strong>Creative Lounge</strong>
+                      <span>Blender 3D Modeling</span>
+                    </div>
+                  </button>
+
+                  <!-- Loading Progress Indicator -->
+                  <div class="model-loading-overlay" slot="poster">
+                    <div class="loading-spinner"></div>
+                    <div class="loading-text">กำลังโหลดโมเดล 3D ห้องนอน...</div>
+                  </div>
+                </model-viewer>
+
+                <!-- PIP Author Mini Badge (Quick Switch to Suit Portrait) -->
+                <div class="hero-photo-pip-badge" id="heroPipBadge" onclick="switchHeroView('photo');" title="คลิกเพื่อสลับดูภาพถ่ายทางการชุดสูท">
+                  <img src="images/profile_suit.jpg" alt="ฉัตรดนัย สัตยากูล (เอิร์ท)" class="pip-avatar-img">
+                  <div class="pip-info">
+                    <span class="pip-name">ฉัตรดนัย สัตยากูล (เอิร์ท)</span>
+                    <span class="pip-role">Video Editor & Developer · ดูภาพตัวจริง ↗</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- PHOTO PROFILE VIEW (Toggled via Switcher) -->
+              <div class="hero-photo-view-box" id="heroPhotoBox" style="display: none;">
+                <div class="photo-glow-aura"></div>
+                <img src="images/profile_suit.jpg" alt="ฉัตรดนัย สัตยากูล (เอิร์ท) ในชุดสูททางการ — Portfolio Cover" class="hero-full-portrait">
+                <div class="photo-hud-caption">
+                  <span class="caption-tag">ฉัตรดนัย สัตยากูล (เอิร์ท)</span>
+                  <span class="caption-sub">ภาพถ่ายทางการจากหน้า 1 ในแฟ้มสะสมผลงาน (Portfolio Cover)</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Floating 3D Control Bar & Camera Angles (Active by default) -->
+            <div class="hud-toolbar-bottom" id="hero3dToolbar">
+              <div class="camera-angles-group">
+                <button class="hud-cam-btn active" id="camBtnIso" onclick="setCameraAngle('isometric');" title="มุมมองไอโซเมตริก">
+                  <span>📐 ไอโซเมตริก</span>
+                </button>
+                <button class="hud-cam-btn" id="camBtnDesk" onclick="setCameraAngle('workstation');" title="มุมมองโฟกัสโต๊ะทำงาน">
+                  <span>🖥️ โต๊ะทำงาน</span>
+                </button>
+                <button class="hud-cam-btn" id="camBtnBed" onclick="setCameraAngle('bed');" title="มุมมองเตียงนอน">
+                  <span>🛏️ เตียงนอน</span>
+                </button>
+                <button class="hud-cam-btn" id="camBtnTop" onclick="setCameraAngle('topdown');" title="มุมมองมองจากด้านบน">
+                  <span>🛸 มุมบน</span>
+                </button>
+              </div>
+
+              <div class="viewer-actions-group">
+                <button class="hud-tool-btn active" id="btnAutoRotate" title="เปิด/ปิดการหมุนอัตโนมัติ">
+                  <span>หมุน 360°</span>
+                </button>
+                <button class="hud-tool-btn" id="btnLighting" title="สลับโหมดแสงไฟ">
+                  <span id="lightingModeText">แสงสตูดิโอ</span>
+                </button>
+                <button class="hud-tool-btn" id="btnFullscreen" title="ขยายเต็มหน้าจอ">
+                  <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2">
+                    <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path>
+                  </svg>
+                </button>
+              </div>
+            </div>
+
+            <!-- User Interaction Guidance with Scrollytelling notification -->
+            <div class="hud-interaction-guide" id="heroGuideText">
+              <span class="guide-dot"></span>
+              <span class="guide-text">🛸 <strong>เลื่อนหน้าเว็บลงเพื่อหมุนห้องนอน 3D ตามการเลื่อน</strong> • คลิกซ้ายลากหมุน 360° • คลิกขวาเลื่อนระนาบ • ล้อเมาส์ซูม</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Signature Luminous Electric Horizon Arc -->
+      <div class="hero-horizon-arc" aria-hidden="true"></div>
+
+      <div class="scroll-indicator">
+        <span class="scroll-mouse">
+          <span class="scroll-wheel"></span>
+        </span>
+        <span class="scroll-text">เลื่อนลงเพื่อดูสารบัญ & ผลงาน</span>
+      </div>
+    </section>
+
+    <!-- SECTION 2: INTERACTIVE TABLE OF CONTENTS (สารบัญ - MATCHING PAGE 2) -->
+    <section class="section toc-section" id="toc">
+      <div class="section-container">
+        <div class="section-header text-center">
+          <div class="section-tag">C O N T E N T S</div>
+          <h2 class="section-title">สารบัญแฟ้มสะสมผลงาน</h2>
+          <p class="section-subtitle">โครงสร้างเนื้อหาตามแฟ้มสะสมผลงาน (Portfolio) ฉบับสมบูรณ์ 09 หน้า</p>
+        </div>
+
+        <div class="toc-card glass-panel">
+          <div class="toc-list">
+            <a href="#about" class="toc-item">
+              <div class="toc-item-left">
+                <span class="toc-item-icon">👤</span>
+                <span>03 ข้อมูลส่วนตัว (Profile)</span>
+              </div>
+              <span class="toc-page-badge">หน้า 03</span>
+            </a>
+
+            <a href="#education" class="toc-item">
+              <div class="toc-item-left">
+                <span class="toc-item-icon">🎓</span>
+                <span>04 ประวัติการศึกษา (Education)</span>
+              </div>
+              <span class="toc-page-badge">หน้า 04</span>
+            </a>
+
+            <a href="#ext-works" class="toc-item">
+              <div class="toc-item-left">
+                <span class="toc-item-icon">💻</span>
+                <span>05 ประสบการณ์ทำงานนอกมหาวิทยาลัย (Selected Work: Dev & IT)</span>
+              </div>
+              <span class="toc-page-badge">หน้า 05</span>
+            </a>
+
+            <a href="#works" class="toc-item">
+              <div class="toc-item-left">
+                <span class="toc-item-icon">🎬</span>
+                <span>06–08 ผลงานระหว่างศึกษา (Selected Work: Media & Video)</span>
+              </div>
+              <span class="toc-page-badge">หน้า 06–08</span>
+            </a>
+
+            <a href="#model3d" class="toc-item">
+              <div class="toc-item-left">
+                <span class="toc-item-icon">🧊</span>
+                <span>ไฮไลต์ 3D โมเดลห้องนอน (Blender Isometric Showcase)</span>
+              </div>
+              <span class="toc-page-badge" style="background:rgba(56,189,248,0.2); color:#38bdf8; border-color:rgba(56,189,248,0.4);">ไฮไลต์ 3D</span>
+            </a>
+
+            <a href="#skills" class="toc-item">
+              <div class="toc-item-left">
+                <span class="toc-item-icon">🛠️</span>
+                <span>09 ทักษะและโปรแกรมที่ใช้งาน (Abilities and Skills)</span>
+              </div>
+              <span class="toc-page-badge">หน้า 09</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 3: PERSONAL INFO (ข้อมูลส่วนตัว / เกี่ยวกับฉัน - MATCHING PAGE 3) -->
+    <section class="section about-section" id="about">
+      <div class="section-container">
+        <div class="section-header text-center">
+          <div class="section-tag">P R O F I L E</div>
+          <h2 class="section-title">ข้อมูลส่วนตัว</h2>
+          <p class="section-subtitle">ตัดต่อวิดีโอและสร้างสรรค์คอนเทนต์</p>
+        </div>
+
+        <div class="profile-pdf-card glass-panel">
+          <div class="card-top-bar">
+            <span style="font-weight: 700; color: var(--accent-primary); letter-spacing: 0.5px;">PROFILE & CONTACT DETAILS</span>
+            <span class="card-window-dot"></span>
+          </div>
+
+          <h3 class="pdf-subheading">
+            <span>เกี่ยวกับฉัน</span>
+          </h3>
+
+          <div class="pdf-info-list">
+            <div class="pdf-info-row">
+              <span class="pdf-info-arrow">↘</span>
+              <span class="pdf-info-label">ชื่อ – นามสกุล</span>
+              <span class="pdf-info-val">ฉัตรดนัย สัตยากูล</span>
+            </div>
+
+            <div class="pdf-info-row">
+              <span class="pdf-info-arrow">↘</span>
+              <span class="pdf-info-label">ชื่อเล่น</span>
+              <span class="pdf-info-val">เอิร์ท</span>
+            </div>
+
+            <div class="pdf-info-row">
+              <span class="pdf-info-arrow">↘</span>
+              <span class="pdf-info-label">อายุ</span>
+              <span class="pdf-info-val">22 ปี</span>
+            </div>
+          </div>
+
+          <h3 class="pdf-subheading" style="margin-top: 18px;">
+            <span>ช่องทางติดต่อ</span>
+          </h3>
+
+          <div class="pdf-info-list">
+            <!-- Phone -->
+            <div class="pdf-info-row" style="flex-wrap: wrap;">
+              <span class="pdf-info-arrow">↘</span>
+              <span class="pdf-info-label">โทรศัพท์</span>
+              <span class="pdf-info-val">095 - 626 - 1402</span>
+              <div class="pdf-contact-actions">
+                <button class="copy-chip" onclick="navigator.clipboard.writeText('0956261402'); showToast('คัดลอกเบอร์โทร 095-626-1402 แล้ว');">
+                  <span>คัดลอกเบอร์</span>
+                </button>
+                <a href="tel:0956261402" class="copy-chip" style="text-decoration:none;">
+                  <span>โทรออกทันที</span>
+                </a>
+              </div>
+            </div>
+
+            <!-- Address -->
+            <div class="pdf-info-row" style="flex-wrap: wrap;">
+              <span class="pdf-info-arrow">↘</span>
+              <span class="pdf-info-label">ที่อยู่</span>
+              <span class="pdf-info-val">16 ถนนประชาราษฎร์ สาย 2</span>
+              <div class="pdf-contact-actions">
+                <button class="copy-chip" onclick="navigator.clipboard.writeText('16 ถนนประชาราษฎร์ สาย 2'); showToast('คัดลอกที่อยู่แล้ว');">
+                  <span>คัดลอกที่อยู่</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Email -->
+            <div class="pdf-info-row" style="flex-wrap: wrap;">
+              <span class="pdf-info-arrow">↘</span>
+              <span class="pdf-info-label">อีเมล</span>
+              <span class="pdf-info-val" style="color:var(--accent-primary);">chatdanaisattayakun@gmail.com</span>
+              <div class="pdf-contact-actions">
+                <button class="copy-chip" onclick="navigator.clipboard.writeText('chatdanaisattayakun@gmail.com'); showToast('คัดลอกอีเมล chatdanaisattayakun@gmail.com แล้ว');">
+                  <span>คัดลอกอีเมล</span>
+                </button>
+                <a href="mailto:chatdanaisattayakun@gmail.com" class="copy-chip" style="text-decoration:none;">
+                  <span>ส่งอีเมลทันที</span>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div style="margin-top: 24px; padding-top: 18px; border-top: 1px solid rgba(255,255,255,0.08); display: flex; gap: 12px; flex-wrap: wrap; align-items: center; justify-content: space-between;">
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <span class="status-pill green">ฉัตรดนัย สัตยากูล · Portfolio 03 / 09</span>
+            </div>
+            <button class="btn btn-secondary btn-sm" onclick="openPdfFlipbook(3);">
+              <span>เปิดดูหน้า 3 ใน PDF</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 4: EDUCATION (ประวัติการศึกษา - MATCHING PAGE 4) -->
+    <section class="section education-section" id="education">
+      <div class="section-container">
+        <div class="section-header text-center">
+          <div class="section-tag">E D U C A T I O N</div>
+          <h2 class="section-title">ประวัติการศึกษา</h2>
+          <p class="section-subtitle">สถานะการศึกษาและทักษะองค์ความรู้จากมหาวิทยาลัย</p>
+        </div>
+
+        <div class="education-pdf-card glass-panel">
+          <!-- Gear/Bulb Emblem from PDF Page 4 -->
+          <div class="edu-icon-badge">
+            <svg class="edu-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 18h6"></path>
+              <path d="M10 22h4"></path>
+              <path d="M12 2a7 7 0 0 0-7 7c0 2.5 1.5 4.5 3 6h8c1.5-1.5 3-3.5 3-6a7 7 0 0 0-7-7z"></path>
+              <circle cx="12" cy="9" r="2"></circle>
+              <path d="M12 5v1m0 6v1m-4-4h1m6 0h1"></path>
+            </svg>
+          </div>
+
+          <div class="edu-content-card">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+              <span style="font-size:0.9rem; color:var(--accent-primary); font-weight:700; letter-spacing:0.5px;">สถานะการศึกษา</span>
+              <button class="btn btn-secondary btn-sm" onclick="openPdfFlipbook(4);">
+                <span>เปิดดูหน้า 4 ใน PDF</span>
+              </button>
+            </div>
+
+            <h3 class="edu-level-title" style="margin-bottom:12px; font-size:1.75rem;">กำลังศึกษาระดับปริญญาตรี</h3>
+
+            <div class="edu-pill-row">
+              <div class="edu-pill-item">
+                <span>🏛️</span>
+                <span>คณะนิเทศศาสตร์</span>
+              </div>
+              <div class="edu-pill-item">
+                <span>🎬</span>
+                <span>สาขาการสร้างสรรค์ดิจิทัลคอนเทนต์และสื่อ</span>
+              </div>
+              <div class="edu-pill-item">
+                <span>🎓</span>
+                <span>มหาวิทยาลัยธุรกิจบัณฑิตย์ (DPU)</span>
+              </div>
+            </div>
+
+            <p style="margin-top: 18px; font-size: 0.95rem; color: var(--text-secondary); line-height: 1.7;">
+              ศึกษาด้านการผลิตสื่อภาพยนตร์, เทคนิคการตัดต่อและการเล่าเรื่อง (Storytelling), การจัดแสง, งานกำกับเสียง และการประยุกต์ใช้นวัตกรรมดิจิทัลในงานนิเทศศาสตร์
+            </p>
+
+            <div style="margin-top: 16px; padding-top: 14px; border-top: 1px solid rgba(255,255,255,0.08); display: flex; justify-content: space-between; align-items: center;">
+              <span class="status-pill green">ฉัตรดนัย สัตยากูล · Portfolio 04 / 09</span>
+              <span style="font-size: 0.84rem; color: var(--text-muted);">พร้อมเริ่มฝึกงานทันที</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 5: EXTERNAL WORK EXPERIENCE (ประสบการณ์ทำงานนอกมหาวิทยาลัย - MATCHING PAGE 5) -->
+    <section class="section ext-works-section" id="ext-works">
+      <div class="section-container">
+        <div class="section-header text-center">
+          <div class="section-tag">S E L E C T E D &nbsp; W O R K</div>
+          <h2 class="section-title">ประสบการณ์ทำงานนอกมหาวิทยาลัย</h2>
+          <p class="section-subtitle">ตัวอย่างงานพัฒนาโปรแกรม เว็บไซต์ และระบบเกม</p>
+        </div>
+
+        <div class="ext-works-grid">
+          <!-- 01: BuiltByBit Game Weapon Animation System -->
+          <div class="ext-work-card glass-panel">
+            <div class="ext-work-badge-corner">01</div>
+            <div class="ext-work-thumb-wrap">
+              <img src="images/work_builtbybit.png" alt="KbAnimation Gun BuiltByBit" class="ext-work-img">
+            </div>
+            <div class="ext-work-body">
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
+                <span class="ext-tag-chip" style="background:rgba(56,189,248,0.18); color:#38bdf8; font-weight:600;">ผลงานบนเว็บไซต์ต่างประเทศ</span>
+                <span style="font-size:0.8rem; color:var(--text-muted);">หน้า 05</span>
+              </div>
+              <h3 class="ext-work-title">01 พัฒนาระบบเกมเพื่อจำหน่าย</h3>
+              <p class="ext-work-desc">
+                พัฒนาโปรแกรมและระบบเกม เพื่อเผยแพร่และจำหน่ายผ่านเว็บไซต์ต่างประเทศ (ระบบ KbAnimation-gun ปืน Glock-17 Customizing บนมาร์เก็ตเพลสระดับโลก BuiltByBit)
+              </p>
+              <div class="ext-work-tags">
+                <span class="ext-tag-chip">🎮 Game System</span>
+                <span class="ext-tag-chip">🔫 3D Weapon Animation</span>
+                <span class="ext-tag-chip">🌐 BuiltByBit Marketplace</span>
+                <span class="ext-tag-chip">📦 Global Downloads</span>
+              </div>
+              <div class="ext-work-footer">
+                <a href="https://builtbybit.com/resources/kbanimation-gun.111985/" target="_blank" rel="noopener" class="btn btn-primary btn-sm">
+                  <span>ชมผลงานบน BuiltByBit →</span>
+                </a>
+                <button class="btn btn-outline btn-sm" onclick="openPdfFlipbook(5);">
+                  <span>ดูใน PDF (หน้า 05)</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- 02: Blissfulcraft Store & IT Support -->
+          <div class="ext-work-card glass-panel">
+            <div class="ext-work-badge-corner">02</div>
+            <div class="ext-work-thumb-wrap">
+              <img src="images/work_blissfulcraft.png" alt="Blissfulcraft Web Store" class="ext-work-img">
+            </div>
+            <div class="ext-work-body">
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
+                <span class="ext-tag-chip" style="background:rgba(56,189,248,0.18); color:#38bdf8; font-weight:600;">เว็บไซต์ · ระบบเกม · IT Support</span>
+                <span style="font-size:0.8rem; color:var(--text-muted);">หน้า 05</span>
+              </div>
+              <h3 class="ext-work-title">02 งานฟรีแลนซ์ด้านโปรแกรมและไอที</h3>
+              <p class="ext-work-desc">
+                รับพัฒนาเว็บไซต์ ระบบเกม และให้บริการสนับสนุนด้านไอที (IT Support) ออกแบบเว็บสโตร์เซิร์ฟเวอร์ Blissful Craft เติมเงินและส่งมอบยศอัตโนมัติ 24 ชม.
+              </p>
+              <div class="ext-work-tags">
+                <span class="ext-tag-chip">🛒 Full-Stack Store</span>
+                <span class="ext-tag-chip">⭐ VIP Automation</span>
+                <span class="ext-tag-chip">🛠️ IT Support & Server</span>
+                <span class="ext-tag-chip">🔐 Payment Integration</span>
+              </div>
+              <div class="ext-work-footer">
+                <a href="https://store.blissfulcraft.net/" target="_blank" rel="noopener" class="btn btn-primary btn-sm">
+                  <span>ชมผลงานบน Blissful Craft →</span>
+                </a>
+                <button class="btn btn-outline btn-sm" onclick="openPdfFlipbook(5);">
+                  <span>ดูใน PDF (หน้า 05)</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 6: UNIVERSITY MEDIA & VIDEO SHOWCASE (MATCHING PAGES 6-8 + LOCAL VIDEOS) -->
+    <section class="section works-section" id="works">
+      <div class="section-container">
+        <div class="section-header text-center">
+          <div class="section-tag">S E L E C T E D &nbsp; W O R K</div>
+          <h2 class="section-title">ผลงานระหว่างศึกษา</h2>
+          <p class="section-subtitle">
+            งานประชาสัมพันธ์ มิวสิกวิดีโอ สารคดี และภาพยนตร์สั้น (หน้า 06–08)
+          </p>
+        </div>
+
+        <!-- University Media Highlights (From PDF Pages 6-8) -->
+        <div class="uni-works-grid">
+          <!-- 01: ArokaGO (Page 6) -->
+          <div class="uni-work-card glass-panel">
+            <div class="uni-work-thumb-wrap">
+              <img src="images/work_arokago.png" alt="ArokaGO Platform" class="uni-work-img">
+              <span class="uni-role-pill">บทบาท: ตัดต่อวิดีโอ</span>
+            </div>
+            <div class="uni-work-body">
+              <div class="uni-work-meta">งานประชาสัมพันธ์และโครงการสร้างสรรค์ · หน้า 06</div>
+              <h4 class="uni-work-title">01 ArokaGO</h4>
+              <p class="uni-work-desc">วิดีโอประชาสัมพันธ์แพลตฟอร์มด้านการท่องเที่ยวเชิงการแพทย์และสุขภาพ จัดวางจังหวะภาพยนตร์ เกรดสีสบายตา</p>
+              <div class="uni-work-actions">
+                <button class="uni-work-btn primary" onclick="openVideoByFilename('Arokago.mp4');">
+                  <span>▶ เล่นวิดีโอ HD</span>
+                </button>
+                <button class="uni-work-btn" onclick="openPdfFlipbook(6);" title="ดูในพอร์ตหน้า 06">
+                  <span>📖 พอร์ตหน้า 06</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- 02: Nitade DPU มหานาค (Page 6) -->
+          <div class="uni-work-card glass-panel">
+            <div class="uni-work-thumb-wrap">
+              <img src="images/work_mahanak.png" alt="Nitade DPU มหานาค" class="uni-work-img">
+              <span class="uni-role-pill">บทบาท: ตัดต่อวิดีโอ</span>
+            </div>
+            <div class="uni-work-body">
+              <div class="uni-work-meta">Nitade DPU × DPU · โครงการประกวดคลิปวิดีโอ · หน้า 06</div>
+              <h4 class="uni-work-title">02 มหานาคผ่านเลนส์ จากรอย...สู่เรื่อง</h4>
+              <p class="uni-work-desc">โครงการประกวดสร้างสรรค์คลิปวิดีโอ ถ่ายทอดวิถีชีวิตชุมชนบ้านบาตร เกรดสีภาพยนตร์ ซับไตเติล 2 ภาษา</p>
+              <div class="uni-work-actions">
+                <button class="uni-work-btn primary" onclick="openVideoByFilename('มหานาค.mp4');">
+                  <span>▶ เล่นวิดีโอ HD</span>
+                </button>
+                <button class="uni-work-btn" onclick="openPdfFlipbook(6);" title="ดูในพอร์ตหน้า 06">
+                  <span>📖 พอร์ตหน้า 06</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- 03: หวานเย็น MILD (Page 7) -->
+          <div class="uni-work-card glass-panel">
+            <div class="uni-work-thumb-wrap">
+              <img src="images/work_mild_mv.png" alt="หวานเย็น MILD Unofficial MV" class="uni-work-img">
+              <span class="uni-role-pill">บทบาท: แสดงและช่วยตัดต่อ</span>
+            </div>
+            <div class="uni-work-body">
+              <div class="uni-work-meta">มิวสิกวิดีโอ Unofficial MV · หน้า 07</div>
+              <h4 class="uni-work-title">03 หวานเย็น — MILD</h4>
+              <p class="uni-work-desc">Unofficial MV มิวสิกวิดีโอโปรเจกต์นักศึกษาคณะนิเทศศาสตร์ ร่วมแสดงนำและร่วมตัดต่อจัดวางจังหวะเพลง</p>
+              <div class="uni-work-actions">
+                <a href="https://www.youtube.com/watch?v=Izee41u0VWY" target="_blank" rel="noopener" class="uni-work-btn primary">
+                  <span>▶ ชมบน YouTube ↗</span>
+                </a>
+                <button class="uni-work-btn" onclick="openPdfFlipbook(7);" title="ดูในพอร์ตหน้า 07">
+                  <span>📖 พอร์ตหน้า 07</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- 04: เธอไม่ได้สอนให้ฉันอยู่คนเดียว (Page 7) -->
+          <div class="uni-work-card glass-panel">
+            <div class="uni-work-thumb-wrap">
+              <img src="images/work_sherry_mv.png" alt="SHERRY Unofficial MV" class="uni-work-img">
+              <span class="uni-role-pill">บทบาท: ตัดต่อวิดีโอ</span>
+            </div>
+            <div class="uni-work-body">
+              <div class="uni-work-meta">SHERRY · Unofficial MV · หน้า 07</div>
+              <h4 class="uni-work-title">04 เธอไม่ได้สอนให้ฉันอยู่คนเดียว</h4>
+              <p class="uni-work-desc">มิวสิกวิดีโอแนว Dramatic ตัดต่อคุมอารมณ์และจังหวะภาพตามเนื้อเพลงและท่วงทำนอง</p>
+              <div class="uni-work-actions">
+                <a href="https://www.youtube.com/watch?v=BPB_owemDx4" target="_blank" rel="noopener" class="uni-work-btn primary">
+                  <span>▶ ชมบน YouTube ↗</span>
+                </a>
+                <button class="uni-work-btn" onclick="openPdfFlipbook(7);" title="ดูในพอร์ตหน้า 07">
+                  <span>📖 พอร์ตหน้า 07</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- 05: สารคดี ร้านกาแฟลุงหมู (Page 8) -->
+          <div class="uni-work-card glass-panel">
+            <div class="uni-work-thumb-wrap">
+              <img src="images/work_lungmoo.png" alt="สารคดี ร้านกาแฟลุงหมู" class="uni-work-img">
+              <span class="uni-role-pill">บทบาท: ตัดต่อวิดีโอ</span>
+            </div>
+            <div class="uni-work-body">
+              <div class="uni-work-meta">สารคดีและภาพยนตร์สั้น · ผลงานสารคดี · หน้า 08</div>
+              <h4 class="uni-work-title">05 สารคดี ร้านกาแฟลุงหมู</h4>
+              <p class="uni-work-desc">ผลงานสารคดีสั้นเล่าเรื่องราวชีวิตและร้านกาแฟ คุมจังหวะสัมภาษณ์ สลับภาพบรรยากาศและการชงกาแฟ</p>
+              <div class="uni-work-actions">
+                <a href="https://www.youtube.com/watch?v=wuVyhEz_-II" target="_blank" rel="noopener" class="uni-work-btn primary">
+                  <span>▶ ชมบน YouTube ↗</span>
+                </a>
+                <button class="uni-work-btn" onclick="openPdfFlipbook(8);" title="ดูในพอร์ตหน้า 08">
+                  <span>📖 พอร์ตหน้า 08</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- 06: Night Shift | งานกะกลางคืน (Page 8) -->
+          <div class="uni-work-card glass-panel">
+            <div class="uni-work-thumb-wrap">
+              <img src="images/work_nightshift.png" alt="Night Shift Short Film" class="uni-work-img">
+              <span class="uni-role-pill">บทบาท: ช่วยตัดต่อวิดีโอ</span>
+            </div>
+            <div class="uni-work-body">
+              <div class="uni-work-meta">Short Film · Long Take · Five Baht Production · หน้า 08</div>
+              <h4 class="uni-work-title">06 Night Shift | งานกะกลางคืน</h4>
+              <p class="uni-work-desc">หนังสั้นสไตล์ Long Take โดย Five Baht Production ถ่ายทอดความกดดันและบรรยากาศกะดึก</p>
+              <div class="uni-work-actions">
+                <a href="https://www.youtube.com/watch?v=UmzCTS4Xqc8" target="_blank" rel="noopener" class="uni-work-btn primary">
+                  <span>▶ ชมบน YouTube ↗</span>
+                </a>
+                <button class="uni-work-btn" onclick="openPdfFlipbook(8);" title="ดูในพอร์ตหน้า 08">
+                  <span>📖 พอร์ตหน้า 08</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Filter Tabs for Video Stream Catalog -->
+        <div style="margin-top: 50px; margin-bottom: 24px; text-align: center;">
+          <h3 style="font-size: 1.5rem; font-weight: 700; color: #ffffff; margin-bottom: 8px;">
+            🎬 วิดีโอสตรีมมิ่งในระบบ (Local HD Streaming Catalog)
+          </h3>
+          <p style="font-size: 0.92rem; color: var(--text-muted); max-width: 600px; margin: 0 auto;">
+            วิดีโอตัดต่อพร้อมรับชมแบบสดๆ สตรีมมิ่งผ่านเทคโนโลยี HTTP Range Requests เลื่อนไทม์ไลน์ได้ทันที
+          </p>
+        </div>
+
+        <div class="filter-tabs-wrapper">
+          <div class="filter-tabs" id="filterTabs">
+            <button class="filter-btn active" data-filter="all">
+              <span>ทั้งหมด</span>
+              <span class="filter-count" id="countAll">6</span>
+            </button>
+            <button class="filter-btn" data-filter="cinematic">
+              <span>🎬 หนังสั้น & สี</span>
+              <span class="filter-count" id="countCinematic">1</span>
+            </button>
+            <button class="filter-btn" data-filter="commercial">
+              <span>📺 โฆษณา</span>
+              <span class="filter-count" id="countCommercial">2</span>
+            </button>
+            <button class="filter-btn" data-filter="motion">
+              <span>⚡ โมชัน</span>
+              <span class="filter-count" id="countMotion">1</span>
+            </button>
+            <button class="filter-btn" data-filter="subtitle">
+              <span>💬 ซับไตเติล</span>
+              <span class="filter-count" id="countSubtitle">2</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Video Cards Grid (Auto-Injected via main.js) -->
+        <div class="video-grid" id="videoGrid">
+          <div class="loading-state">
+            <div class="spinner"></div>
+            <p>กำลังโหลดแคตตาล็อกผลงานวิดีโอ...</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 7: 3D PROJECT DEEP DIVE & BLENDER BREAKDOWN -->
+    <section class="section model3d-section" id="model3d">
+      <div class="section-container">
+        <div class="section-header text-center">
+          <div class="section-tag">BLENDER 3D PROJECT ARCHITECTURE</div>
+          <h2 class="section-title">เบื้องหลังการออกแบบ 3D Isometric Bedroom Model</h2>
+          <p class="section-subtitle">
+            กระบวนการขึ้นโมเดลสามมิติด้วย <strong>Blender 5.x</strong> ผสานการจัดแสง การสร้างพื้นผิว PBR และการแปลงโมเดลสู่ WebGL 60 FPS
+          </p>
+        </div>
+
+        <div class="model3d-card glass-panel">
+          <!-- 3D Render Display Showcase (Live Interactive Model) -->
+          <div class="model3d-viewer-container" style="background:#050a18; position:relative; min-height:480px; height:100%; border-radius:16px; overflow:hidden;">
+            <model-viewer
+              id="section3dViewer"
+              src="models/bedroom.glb"
+              poster="models/bedroom_poster.jpg"
+              alt="Blender 3D Isometric Bedroom Model by Chatdanai"
+              camera-controls
+              camera-orbit="135deg 55deg auto"
+              auto-rotate
+              rotation-per-second="8deg"
+              shadow-intensity="1.3"
+              shadow-softness="0.75"
+              exposure="0.95"
+              environment-image="neutral"
+              interaction-prompt="auto"
+              touch-action="pan-y"
+              loading="lazy"
+              style="width: 100%; height: 100%; min-height: 480px;">
+              
+              <!-- Hotspots -->
+              <button class="hud-hotspot-pin" slot="hotspot-workstation" data-position="-0.6 0.9 0.4" data-normal="0 1 0">
+                <span class="hotspot-pulse"></span>
+                <span class="hotspot-icon">🖥️</span>
+                <div class="hotspot-tooltip">
+                  <strong>Workstation 3D</strong>
+                  <span>75 Meshes · 414K Polys</span>
+                </div>
+              </button>
+
+              <button class="hud-hotspot-pin" slot="hotspot-bed" data-position="0.5 0.6 -0.3" data-normal="0 1 0">
+                <span class="hotspot-pulse"></span>
+                <span class="hotspot-icon">🛏️</span>
+                <div class="hotspot-tooltip">
+                  <strong>Creative Lounge</strong>
+                  <span>Hard-surface & PBR</span>
+                </div>
+              </button>
+            </model-viewer>
+            <div class="hud-corner-bracket tl"></div>
+            <div class="hud-corner-bracket tr"></div>
+            <div class="hud-corner-bracket bl"></div>
+            <div class="hud-corner-bracket br"></div>
+            <div class="model3d-toolbar-overlay" style="position:absolute; bottom:14px; left:14px; right:14px; display:flex; justify-content:space-between; align-items:center; background:rgba(4,9,26,0.92); padding:8px 14px; border-radius:10px; border:1px solid rgba(56,189,248,0.3); z-index:15; backdrop-filter:blur(8px);">
+              <span style="font-size:0.8rem; color:var(--text-secondary); display:flex; align-items:center; gap:6px;">
+                <span class="hud-radar-dot"></span>
+                <span>Blender 5.x WebGL Live 3D Model</span>
+              </span>
+              <div style="display:flex; gap:8px;">
+                <button class="btn btn-secondary btn-sm" id="btnSection3dReset" onclick="resetSection3dCam();">
+                  <span>🔄 รีเซ็ตมุมมอง</span>
+                </button>
+                <a href="#hero" class="btn btn-primary btn-sm" onclick="switchHeroView('3d');">
+                  <span>🛸 หมุนโมเดลที่หน้าแรก</span>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- 3D Model Specs & Insights Panel -->
+          <div class="model3d-details-panel">
+            <div class="model3d-details-header">
+              <div class="model3d-badge">
+                <img src="images/logo_blender.png" alt="Blender 3D" class="model3d-logo-icon">
+                <span>Blender 3D Architecture</span>
+              </div>
+              <h3 class="model3d-title">Futuristic Isometric Bedroom Layout</h3>
+              <p class="model3d-desc">
+                โปรเจกต์การขึ้นโมเดลห้องนอนสไตล์ไซไฟ-มินิมอล (Cozy Sci-Fi Room) จัดวางองค์ประกอบเตียงนอนสองชั้น/เดี่ยว 
+                ชั้นวางของติดผนัง โต๊ะข้างเตียง แผงควบคุมบุผนัง และงานจัดแสง Hard-surface ให้มิติสมจริง 
+                แสดงถึงความเข้าใจในการขึ้นรูปทรง 3 มิติ สัดส่วนห้อง (Proportion) และการจัดองค์ประกอบภาพสำหรับงานตัดต่อและแอนิเมชัน
+              </p>
+            </div>
+
+            <!-- Technical Specs Grid -->
+            <div class="model3d-specs-grid">
+              <div class="spec-item">
+                <span class="spec-label">โปรแกรมที่ใช้</span>
+                <span class="spec-val">Blender 5.x</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-label">จำนวนชิ้นส่วน (Meshes)</span>
+                <span class="spec-val">75 วัตถุ</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-label">จำนวนโพลีกอน (Polygons)</span>
+                <span class="spec-val">414,232 Polys</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-label">วัสดุ & แมททีเรียล</span>
+                <span class="spec-val">44 Materials (PBR)</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-label">มาตรฐานไฟล์เว็บ</span>
+                <span class="spec-val">glTF 2.0 / GLB</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-label">เฟรมเรตการเรนเดอร์</span>
+                <span class="spec-val">60 FPS WebGL</span>
+              </div>
+            </div>
+
+            <div style="margin-top:20px; display:flex; gap:10px; flex-wrap:wrap;">
+              <a href="#hero" class="btn btn-primary btn-sm" onclick="switchHeroView('3d');">
+                <span>หมุนโมเดล 360° ใน Hero ด้านบน</span>
+              </a>
+              <button class="btn btn-secondary btn-sm" onclick="openPdfFlipbook(9);">
+                <span>ดูทักษะ Blender ในพอร์ต (หน้า 9)</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 8: ABILITIES AND SKILLS (MATCHING PAGE 9) -->
+    <section class="section skills-section" id="skills">
+      <div class="section-container">
+        <div class="section-header text-center">
+          <div class="section-tag">ABILITIES AND SKILLS</div>
+          <h2 class="section-title">ทักษะ & ความถนัดแต่ละโปรแกรม</h2>
+          <p class="section-subtitle">ข้อมูลความถนัดเชิงลึกตามแฟ้มสะสมผลงาน (พอร์ตโฟลิโอ หน้า 9)</p>
+        </div>
+
+        <!-- Candidate Real Statement Quote Card (from Page 9) -->
+        <div class="skills-pdf-quote-card glass-panel">
+          <div class="quote-badge">
+            <span>💡</span>
+            <span>แนวคิด & ความสนใจ (CANDIDATE PERSPECTIVE)</span>
+          </div>
+          <blockquote class="quote-actual-text">
+            "ผมเป็นคนชอบเรียนรู้เกี่ยวกับเทคโนโลยีใหม่ๆ เรื่องคอมเรื่องรถและ AI ผมชอบศึกษาผ่าน AI ตลอดเวลา มีความรู้เกี่ยวกับ IT และการใช้โปรแกรมต่างๆ นอกเหนือจากที่แสดง"
+          </blockquote>
+          <div style="margin-top: 14px; text-align: right; color: var(--accent-primary); font-size: 0.9rem; font-weight: 600;">
+            — ฉัตรดนัย สัตยากูล (เอิร์ท)
+          </div>
+        </div>
+
+        <!-- Detailed 5 Software Cards from Page 9 -->
+        <div class="software-detailed-grid">
+          <!-- 1. Premiere Pro -->
+          <div class="software-detail-card glass-panel">
+            <div class="software-detail-header">
+              <img src="images/logo_pr.png" alt="Premiere Pro" class="software-detail-icon">
+              <div>
+                <div class="software-detail-name">Adobe Premiere Pro</div>
+                <div class="software-detail-tier">ระดับดีเยี่ยม (Expert)</div>
+              </div>
+            </div>
+            <p class="software-detail-desc">
+              ใช้ได้ระดับดีเยี่ยม รู้การใช้ฟังก์ชั่นแต่ละอย่างของโปรแกรมนี้ คุมจังหวะภาพ Pacing, การตัดต่อตามเสียงเพลง, ซาวด์ดีไซน์ และการวางไทม์มิ่งซับไตเติล
+            </p>
+          </div>
+
+          <!-- 2. After Effects -->
+          <div class="software-detail-card glass-panel">
+            <div class="software-detail-header">
+              <img src="images/logo_ae.png" alt="After Effects" class="software-detail-icon">
+              <div>
+                <div class="software-detail-name">Adobe After Effects</div>
+                <div class="software-detail-tier">ระดับดีเยี่ยม (Advanced)</div>
+              </div>
+            </div>
+            <p class="software-detail-desc">
+              ใช้ได้ระดับดีเยี่ยม รู้การใช้ฟังก์ชั่นแต่ละอย่างของโปรแกรมนี้ เคยทำพวกโมชั่นกราฟิกได้ การทำ CGI นิดหน่อย และงานเอฟเฟกต์ Motion Blur / Keyframing
+            </p>
+          </div>
+
+          <!-- 3. Antigravity IDE -->
+          <div class="software-detail-card glass-panel" style="border-color: rgba(0, 210, 255, 0.45); box-shadow: 0 0 25px rgba(0, 210, 255, 0.15);">
+            <div class="software-detail-header">
+              <img src="images/logo_antigravity.png" alt="Antigravity IDE" class="software-detail-icon">
+              <div>
+                <div class="software-detail-name">Antigravity IDE & AI</div>
+                <div class="software-detail-tier" style="color:var(--accent-primary);">ระดับดีเยี่ยม (AI & Coding Tool)</div>
+              </div>
+            </div>
+            <p class="software-detail-desc">
+              ใช้ได้ระดับดีเยี่ยม เป็นโปรแกรมสำหรับเขียนโค้ดกับ AI ที่ผมใช้ในการหาเงินมากที่สุด พัฒนาระบบ Full-Stack เว็บไซต์ สคริปต์เซิร์ฟเวอร์เกม และระบบออโตเมชัน
+            </p>
+          </div>
+
+          <!-- 4. Blender -->
+          <div class="software-detail-card glass-panel">
+            <div class="software-detail-header">
+              <img src="images/logo_blender.png" alt="Blender 3D" class="software-detail-icon">
+              <div>
+                <div class="software-detail-name">Blender 3D</div>
+                <div class="software-detail-tier">ระดับพื้นฐาน (Foundational 3D)</div>
+              </div>
+            </div>
+            <p class="software-detail-desc">
+              ใช้ได้ระดับพื้นฐาน รู้การสร้างโมเดลต่างๆ และการทำรูปทรงและการทำอนิเมะ สามารถขึ้นรูปทรงห้องนอนและเฟอร์นิเจอร์ 3D (มีผลงานให้ชมในส่วนโมเดล 3D)
+            </p>
+          </div>
+
+          <!-- 5. Photoshop -->
+          <div class="software-detail-card glass-panel">
+            <div class="software-detail-header">
+              <img src="images/logo_ps.png" alt="Photoshop" class="software-detail-icon">
+              <div>
+                <div class="software-detail-name">Adobe Photoshop</div>
+                <div class="software-detail-tier">ระดับเริ่มต้น (Basic / Editing)</div>
+              </div>
+            </div>
+            <p class="software-detail-desc">
+              ใช้ได้ระดับเริ่มต้น ใช้แบบพอลบพื้นหลังได้ ตกแต่งปกตินิดหน่อย จัดวางเลย์เอาต์กราฟิก ไดคัทภาพ และปรับแสงเบื้องต้น
+            </p>
+          </div>
+
+          <!-- 6. CapCut Pro & Short-Form -->
+          <div class="software-detail-card glass-panel">
+            <div class="software-detail-header">
+              <img src="images/logo_capcut.png" alt="CapCut Pro" class="software-detail-icon">
+              <div>
+                <div class="software-detail-name">CapCut Pro & Mobile</div>
+                <div class="software-detail-tier">ระดับดีเยี่ยม (Viral & Quick Cut)</div>
+              </div>
+            </div>
+            <p class="software-detail-desc">
+              ตัดต่อคลิปสั้นลง TikTok, Reels, YouTube Shorts ได้อย่างรวดเร็ว จัดวาง Hook ดึงความสนใจภายใน 3 วินาทีแรก และคุมอัตราส่วน 9:16 ได้แม่นยำ
+            </p>
+          </div>
+        </div>
+
+        <div style="margin-top: 32px; text-align: center;">
+          <button class="btn btn-secondary" onclick="openPdfFlipbook(9);">
+            <span>เปิดดูหน้า Abilities & Skills ใน PDF (หน้า 9)</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 9: CONTACT & INQUIRY (ช่องทางติดต่อ) -->
+    <section class="section contact-section" id="contact">
+      <div class="section-container">
+        <div class="section-header text-center">
+          <div class="section-tag">INTERNSHIP INQUIRY</div>
+          <h2 class="section-title">ช่องทางติดต่อ & นัดสัมภาษณ์ฝึกงาน</h2>
+          <p class="section-subtitle">สนใจเรียกสัมภาษณ์ ขอข้อมูลเพิ่มเติม หรือมอบหมายโจทย์ทดสอบ สามารถติดต่อได้ทุกช่องทางครับ</p>
+        </div>
+
+        <div class="contact-grid">
+          <!-- Contact Info Cards -->
+          <div class="contact-methods">
+            <!-- Phone -->
+            <div class="contact-item glass-panel">
+              <div class="contact-icon-box">📞</div>
+              <div class="contact-details">
+                <div class="contact-type">เบอร์โทรศัพท์ (Phone Number)</div>
+                <div class="contact-val">095-626-1402</div>
+                <div style="display: flex; gap: 8px; margin-top: 6px;">
+                  <button class="copy-chip" onclick="navigator.clipboard.writeText('0956261402'); showToast('คัดลอกเบอร์ 095-626-1402 แล้ว');">
+                    <span>คัดลอกเบอร์โทร</span>
+                  </button>
+                  <a href="tel:0956261402" class="copy-chip" style="text-decoration:none;">
+                    <span>โทรออกทันที</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Email (Updated) -->
+            <div class="contact-item glass-panel">
+              <div class="contact-icon-box">📧</div>
+              <div class="contact-details">
+                <div class="contact-type">Email Address (อีเมลหลักตามพอร์ต)</div>
+                <div class="contact-val" style="color:var(--accent-primary);">chatdanaisattayakun@gmail.com</div>
+                <div style="display: flex; gap: 8px; margin-top: 6px;">
+                  <button class="copy-chip" onclick="navigator.clipboard.writeText('chatdanaisattayakun@gmail.com'); showToast('คัดลอกอีเมล chatdanaisattayakun@gmail.com แล้ว');">
+                    <span>คัดลอกอีเมล</span>
+                  </button>
+                  <a href="mailto:chatdanaisattayakun@gmail.com" class="copy-chip" style="text-decoration:none;">
+                    <span>ส่งอีเมลทันที</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Address -->
+            <div class="contact-item glass-panel">
+              <div class="contact-icon-box">📍</div>
+              <div class="contact-details">
+                <div class="contact-type">ที่อยู่ (Current Address)</div>
+                <div class="contact-val">16 ถนน ประชาราษฎร์ สาย 2</div>
+                <div style="margin-top: 6px;">
+                  <button class="copy-chip" onclick="navigator.clipboard.writeText('16 ถนน ประชาราษฎร์ สาย 2'); showToast('คัดลอกที่อยู่แล้ว');">
+                    <span>คัดลอกที่อยู่</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Status -->
+            <div class="contact-item glass-panel">
+              <div class="contact-icon-box">⚡</div>
+              <div class="contact-details">
+                <div class="contact-type">สถานะการฝึกงาน</div>
+                <div class="contact-val">พร้อมเริ่มฝึกงานทันที (Available for Internship)</div>
+                <span class="status-pill green">พร้อมเริ่มฝึกงาน (Ready to Start)</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-left">
+        <span class="footer-brand">CHATDANAI<span class="highlight">.S</span></span>
+        <span class="footer-copy">© 2026 ฉัตรดนัย สัตยากูล (เอิร์ท) • Portfolio & Resume. คณะนิเทศศาสตร์ มหาวิทยาลัยธุรกิจบัณฑิตย์</span>
+      </div>
+      <div class="footer-right">
+        <button class="btn btn-outline btn-sm" onclick="openPdfFlipbook(1);">
+          <span>เปิดดูพอร์ต PDF 9 หน้า</span>
+        </button>
+        <a href="#hero" class="back-to-top-btn" aria-label="กลับขึ้นด้านบน">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="18 15 12 9 6 15"></polyline>
+          </svg>
+          <span>กลับสู่ด้านบน</span>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- CINEMATIC THEATER MODAL (VIDEO PLAYER) -->
+  <div class="theater-modal" id="theaterModal" aria-hidden="true" role="dialog">
+    <div class="modal-backdrop" id="modalBackdrop"></div>
+    <div class="modal-container">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <div class="modal-title-group">
+          <span class="modal-badge" id="modalBadge">FEATURED</span>
+          <h3 class="modal-video-title" id="modalVideoTitle">Video Title</h3>
+        </div>
+        <div class="modal-header-actions">
+          <button class="modal-close-btn" id="modalCloseBtn" aria-label="ปิดหน้าต่าง">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Player Frame -->
+      <div class="video-player-wrapper" id="videoPlayerWrapper">
+        <video 
+          class="cinematic-video" 
+          id="mainVideoPlayer" 
+          playsinline 
+          preload="metadata">
+        </video>
+
+        <!-- Big Play/Pause Overlay Animation -->
+        <div class="play-overlay" id="playOverlay">
+          <div class="play-overlay-icon" id="playOverlayIcon">
+            <svg viewBox="0 0 24 24" width="36" height="36" fill="currentColor">
+              <polygon points="5 3 19 12 5 21 5 3"></polygon>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Custom Controls -->
+        <div class="player-controls" id="playerControls">
+          <!-- Timeline Scrubber -->
+          <div class="timeline-container" id="timelineContainer">
+            <div class="timeline-bar">
+              <div class="timeline-buffered" id="timelineBuffered"></div>
+              <div class="timeline-progress" id="timelineProgress">
+                <span class="timeline-thumb"></span>
+              </div>
+            </div>
+            <div class="timeline-time-tooltip" id="timeTooltip">00:00</div>
+          </div>
+
+          <!-- Bottom Controls Row -->
+          <div class="controls-row">
+            <div class="controls-left">
+              <!-- Play/Pause -->
+              <button class="ctrl-btn" id="ctrlPlayBtn" aria-label="เล่น/หยุด">
+                <svg class="icon-play" viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                  <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                </svg>
+                <svg class="icon-pause" viewBox="0 0 24 24" width="20" height="20" fill="currentColor" style="display:none;">
+                  <rect x="6" y="4" width="4" height="16"></rect>
+                  <rect x="14" y="4" width="4" height="16"></rect>
+                </svg>
+              </button>
+
+              <!-- Volume / Mute -->
+              <div class="volume-group">
+                <button class="ctrl-btn" id="ctrlVolumeBtn" aria-label="ระดับเสียง">
+                  <svg class="icon-volume-high" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                    <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                    <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+                  </svg>
+                  <svg class="icon-volume-mute" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" style="display:none;">
+                    <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                    <line x1="23" y1="9" x2="17" y2="15"></line>
+                    <line x1="17" y1="9" x2="23" y2="15"></line>
+                  </svg>
+                </button>
+                <div class="volume-slider-wrap">
+                  <input type="range" class="volume-slider" id="volumeSlider" min="0" max="1" step="0.05" value="1">
+                </div>
+              </div>
+
+              <!-- Time display -->
+              <div class="time-display">
+                <span id="currentTimeDisplay">00:00</span>
+                <span class="time-sep">/</span>
+                <span id="durationDisplay">00:00</span>
+              </div>
+            </div>
+
+            <div class="controls-right">
+              <!-- Playback Speed -->
+              <div class="speed-picker-wrap">
+                <button class="ctrl-btn speed-btn" id="ctrlSpeedBtn" title="ความเร็วการเล่น">1x</button>
+                <div class="speed-menu" id="speedMenu">
+                  <button class="speed-opt" data-speed="0.5">0.5x</button>
+                  <button class="speed-opt" data-speed="0.75">0.75x</button>
+                  <button class="speed-opt active" data-speed="1.0">1.0x (ปกติ)</button>
+                  <button class="speed-opt" data-speed="1.25">1.25x</button>
+                  <button class="speed-opt" data-speed="1.5">1.5x</button>
+                  <button class="speed-opt" data-speed="2.0">2.0x</button>
+                </div>
+              </div>
+
+              <!-- Fullscreen -->
+              <button class="ctrl-btn" id="ctrlFullscreenBtn" title="เต็มจอ (Fullscreen)">
+                <svg class="icon-fullscreen-enter" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="15 3 21 3 21 9"></polyline>
+                  <polyline points="9 21 3 21 3 15"></polyline>
+                  <polyline points="21 15 21 21 15 21"></polyline>
+                  <polyline points="3 9 3 3 9 3"></polyline>
+                </svg>
+                <svg class="icon-fullscreen-exit" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" style="display:none;">
+                  <polyline points="4 14 10 14 10 20"></polyline>
+                  <polyline points="20 10 14 10 14 4"></polyline>
+                  <polyline points="14 20 14 14 20 14"></polyline>
+                  <polyline points="10 4 10 10 4 10"></polyline>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Video Details Section in Modal -->
+      <div class="modal-info-panel">
+        <div class="modal-meta-row">
+          <div class="meta-tag-list" id="modalToolTags"></div>
+          <div class="meta-file-specs">
+            <span class="spec-item" id="modalFileSize">ขนาด: -- MB</span>
+            <span class="spec-dot">•</span>
+            <span class="spec-item" id="modalFileType">MP4 (H.264)</span>
+            <span class="spec-dot">•</span>
+            <span class="spec-item" id="modalHighlightBadge">Dynamic Sync</span>
+          </div>
+        </div>
+
+        <p class="modal-description" id="modalDescription">
+          คำอธิบายเทคนิคการตัดต่อและการสร้างสรรค์...
+        </p>
+
+        <div class="modal-actions-row">
+          <button class="btn btn-outline btn-sm" id="copyShareLinkBtn">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+              <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+            </svg>
+            <span>คัดลอกลิงก์ผลงาน</span>
+          </button>
+          <a href="#contact" class="btn btn-primary btn-sm" onclick="closeTheaterModal();">
+            <span>สนใจนัดสัมภาษณ์ฝึกงาน ติดต่อเรา</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- INTERACTIVE FULL PDF PORTFOLIO & RESUME MODAL -->
+  <div class="pdf-flipbook-modal" id="pdfFlipbookModal" aria-hidden="true" role="dialog">
+    <div class="modal-backdrop" onclick="closePdfFlipbook();"></div>
+    <div class="pdf-modal-container">
+      <!-- Header with Portfolio / Resume Tabs -->
+      <div class="pdf-modal-header">
+        <div class="modal-title-group" style="gap:12px;">
+          <div class="pdf-modal-tabs">
+            <button class="pdf-modal-tab-btn active" id="tabBtnPortfolio" onclick="switchPdfModalTab('portfolio');">
+              <span>📖 Portfolio (9 หน้า)</span>
+            </button>
+            <button class="pdf-modal-tab-btn" id="tabBtnResume" onclick="switchPdfModalTab('resume');">
+              <span>📄 Resume (1 หน้า)</span>
+            </button>
+          </div>
+          <h3 class="modal-video-title" id="pdfModalTitle" style="font-size:1rem; margin:0;">
+            แฟ้มสะสมผลงาน — ฉัตรดนัย สัตยากูล (หน้า <span id="pdfCurrentPageNum">1</span> / 9)
+          </h3>
+        </div>
+        <div style="display:flex; align-items:center; gap:10px;">
+          <a href="/download/portfolio" id="pdfDownloadBtn" download="Portfolio_Chatdanai_Sattayakun.pdf" class="btn btn-primary btn-sm" title="ดาวน์โหลดไฟล์ PDF ต้นฉบับ">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="7 10 12 15 17 10"></polyline>
+              <line x1="12" y1="15" x2="12" y2="3"></line>
+            </svg>
+            <span id="pdfDownloadText">ดาวน์โหลด Portfolio (8.3MB)</span>
+          </a>
+          <button class="modal-close-btn" onclick="closePdfFlipbook();" aria-label="ปิดหน้าต่าง">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Main Display Area with Prev/Next Arrows -->
+      <div class="pdf-modal-view-area">
+        <button class="pdf-nav-arrow prev" id="pdfPrevArrow" onclick="flipPdfPage(-1);" title="หน้าก่อนหน้า (ลูกศรซ้าย)">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5">
+            <polyline points="15 18 9 12 15 6"></polyline>
+          </svg>
+        </button>
+
+        <img src="images/portfolio_pdf/portfolio_page_1.jpg" alt="Portfolio & Resume Document" id="pdfPageDisplay" class="pdf-page-img-display">
+
+        <button class="pdf-nav-arrow next" id="pdfNextArrow" onclick="flipPdfPage(1);" title="หน้าถัดไป (ลูกศรขวา)">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5">
+            <polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Footer with Page Thumbnail Strip -->
+      <div class="pdf-modal-footer">
+        <div id="pdfPaginationRow" style="display:flex; align-items:center; gap:10px;">
+          <span style="font-size:0.85rem; color:var(--text-muted); font-weight:600;">เลือกหน้า:</span>
+          <div class="pdf-thumb-ribbon" id="pdfThumbRibbon">
+            <button class="pdf-thumb-btn active" onclick="gotoPdfPage(1)">1</button>
+            <button class="pdf-thumb-btn" onclick="gotoPdfPage(2)">2</button>
+            <button class="pdf-thumb-btn" onclick="gotoPdfPage(3)">3</button>
+            <button class="pdf-thumb-btn" onclick="gotoPdfPage(4)">4</button>
+            <button class="pdf-thumb-btn" onclick="gotoPdfPage(5)">5</button>
+            <button class="pdf-thumb-btn" onclick="gotoPdfPage(6)">6</button>
+            <button class="pdf-thumb-btn" onclick="gotoPdfPage(7)">7</button>
+            <button class="pdf-thumb-btn" onclick="gotoPdfPage(8)">8</button>
+            <button class="pdf-thumb-btn" onclick="gotoPdfPage(9)">9</button>
+          </div>
+        </div>
+
+        <div style="display:flex; gap:10px;">
+          <a href="Portfolio_TH.pdf" id="pdfOpenNewTabBtn" target="_blank" class="btn btn-outline btn-sm">
+            <span>เปิด PDF แท็บใหม่</span>
+          </a>
+          <button class="btn btn-secondary btn-sm" onclick="closePdfFlipbook();">ปิดหน้าต่าง</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FLOATING 3D HUD COMPANION (SCROLLYTELLING TELEMETRY DOCK) -->
+  <div class="floating-3d-companion glass-panel" id="floating3dCompanion">
+    <div class="companion-header" onclick="toggleFloatingCompanion();">
+      <div class="companion-status">
+        <span class="radar-ping"></span>
+        <span class="companion-tag">3D SCROLL ENGINE</span>
+      </div>
+      <span class="companion-degrees" id="companionDegrees">135°</span>
+      <button class="companion-toggle-btn" id="btnCompanionToggle" title="ย่อ/ขยาย" aria-label="ย่อหรือขยายแถบ 3D">▲</button>
+    </div>
+    <div class="companion-body" id="companionBody">
+      <div class="companion-meta">
+        <span id="companionSectionLabel">01 HERO · 0%</span>
+        <span class="companion-model-name">Blender Bedroom 3D</span>
+      </div>
+      <div class="companion-progress-bar">
+        <div class="companion-progress-fill" id="companionProgressFill" style="width: 0%;"></div>
+      </div>
+      <div class="companion-controls">
+        <a href="#hero" class="companion-chip" onclick="switchHeroView('3d');">
+          <span>🛸 ขึ้นไปโมเดลหลัก</span>
+        </a>
+        <a href="#model3d" class="companion-chip">
+          <span>⚙️ รายละเอียด 3D</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div class="toast-notice" id="toastNotice">คัดลอกลิงก์แล้ว!</div>
+
+  <!-- Javascript Scripts -->
+  <script src="js/sfx.js"></script>
+  <script src="js/themes.js"></script>
+  <script src="js/player.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
