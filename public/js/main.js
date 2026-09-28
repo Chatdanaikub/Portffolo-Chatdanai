@@ -11,22 +11,6 @@ let currentFilter = 'all';
 const FALLBACK_VIDEOS = [
   {
     id: 1,
-    filename: 'รีวิว.mp4',
-    streamUrl: '/api/stream/%E0%B8%A3%E0%B8%B5%E0%B8%A7%E0%B8%B4%E0%B8%A7.mp4',
-    driveUrl: 'https://drive.google.com/file/d/1Kps7LLMhuo8HMPFna-vwD0UVeR0xcm7e/view?usp=sharing',
-    driveId: '1Kps7LLMhuo8HMPFna-vwD0UVeR0xcm7e',
-    poster: 'images/sample_Foodmp4.jpg',
-    title: 'รีวิวร้านหมูจุ่มอาโม สาขาตลาดไท — Dynamic Food Review',
-    category: 'motion',
-    categoryLabel: 'รีวิว & ไดนามิกคัต',
-    description: 'ผลงานตัดต่อคลิปรีวิวร้านหมูจุ่มอาโม สาขาตลาดไท สไตล์คอนเทนต์รีวิวอาหารยอดนิยม จังหวะตัดต่อกระชับ ฉับไว (Pacing Cut) ซิงก์ดนตรีและซาวด์เอฟเฟกต์ เพื่อเพิ่มความน่ากินและดึงดูดลูกค้า',
-    tools: ['Adobe Premiere Pro', 'CapCut Pro', 'Sound FX', 'Motion Pacing'],
-    highlight: 'Viral Food Review',
-    badge: 'Trending',
-    sizeFormatted: '125.2 MB'
-  },
-  {
-    id: 2,
     filename: 'Arokago.mp4',
     streamUrl: '/api/stream/Arokago.mp4',
     driveUrl: 'https://drive.google.com/file/d/1laOhtOfl7q4sdasFSEMPQ8zyP8cM8-GL/view?usp=sharing',
@@ -42,7 +26,7 @@ const FALLBACK_VIDEOS = [
     sizeFormatted: '266.9 MB'
   },
   {
-    id: 3,
+    id: 2,
     filename: 'coco pop.mp4',
     streamUrl: '/api/stream/coco%20pop.mp4',
     driveUrl: 'https://drive.google.com/file/d/1MNf1PU9cVKe8wDkAt4dxd1PlWB-hNiIc/view?usp=sharing',
@@ -58,7 +42,7 @@ const FALLBACK_VIDEOS = [
     sizeFormatted: '64.5 MB'
   },
   {
-    id: 4,
+    id: 3,
     filename: 'Food.mp4',
     streamUrl: '/api/stream/Food.mp4',
     driveUrl: 'https://drive.google.com/file/d/1pFPw8B64CCK_zFRJpwVj_cpo6a57n-4q/view?usp=sharing',
@@ -74,7 +58,7 @@ const FALLBACK_VIDEOS = [
     sizeFormatted: '1.14 GB'
   },
   {
-    id: 5,
+    id: 4,
     filename: 'มหานาค.mp4',
     streamUrl: '/api/stream/%E0%B8%A1%E0%B8%AB%E0%B8%B2%E0%B8%99%E0%B8%B2%E0%B8%84.mp4',
     driveUrl: 'https://drive.google.com/file/d/1RFvMFCkASRqmIdBM4v5Gt5Lly19QQuGj/view?usp=sharing',
@@ -90,7 +74,7 @@ const FALLBACK_VIDEOS = [
     sizeFormatted: '813.7 MB'
   },
   {
-    id: 6,
+    id: 5,
     filename: 'animation.MP4',
     streamUrl: '/api/stream/animation.MP4',
     driveUrl: 'https://drive.google.com/file/d/17i0jwEYNXZrGw-lSxlCR93Vi8j3FoM4y/view?usp=sharing',

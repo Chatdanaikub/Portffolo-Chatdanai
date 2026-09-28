@@ -14,24 +14,6 @@ const VIDEO_DIR = path.join(__dirname, 'ผลงานคลิปที่เ�
 
 // Preset metadata for known video files matching Chatdanai's resume projects
 const VIDEO_METADATA_PRESETS = {
-  'รีวิว.mp4': {
-    title: 'รีวิวร้านหมูจุ่มอาโม สาขาตลาดไท — Dynamic Food Review',
-    category: 'motion',
-    categoryLabel: 'รีวิว & ไดนามิกคัต',
-    description: 'ผลงานตัดต่อคลิปรีวิวร้านหมูจุ่มอาโม สาขาตลาดไท สไตล์คอนเทนต์รีวิวอาหารยอดนิยม จังหวะตัดต่อกระชับ ฉับไว (Pacing Cut) ซิงก์ดนตรีและซาวด์เอฟเฟกต์ เพื่อเพิ่มความน่ากินและดึงดูดลูกค้า',
-    tools: ['Adobe Premiere Pro', 'CapCut Pro', 'Sound FX', 'Motion Pacing'],
-    highlight: 'Viral Food Review',
-    badge: 'Trending'
-  },
-  '0913.mp4': {
-    title: 'รีวิวร้านหมูจุ่มอาโม สาขาตลาดไท — Dynamic Food Review',
-    category: 'motion',
-    categoryLabel: 'รีวิว & ไดนามิกคัต',
-    description: 'ผลงานตัดต่อคลิปรีวิวร้านหมูจุ่มอาโม สาขาตลาดไท สไตล์คอนเทนต์รีวิวอาหารยอดนิยม จังหวะตัดต่อกระชับ ฉับไว (Pacing Cut) ซิงก์ดนตรีและซาวด์เอฟเฟกต์ เพื่อเพิ่มความน่ากินและดึงดูดลูกค้า',
-    tools: ['Adobe Premiere Pro', 'CapCut Pro', 'Sound FX', 'Motion Pacing'],
-    highlight: 'Viral Food Review',
-    badge: 'Trending'
-  },
   'Arokago.mp4': {
     title: 'ArokaGO — Medical & Wellness Tourism Platform',
     category: 'commercial',
@@ -98,8 +80,6 @@ const VIDEO_METADATA_PRESETS = {
 };
 
 const VIDEO_POSTERS = {
-  'รีวิว.mp4': 'images/sample_Foodmp4.jpg',
-  '0913.mp4': 'images/sample_Foodmp4.jpg',
   'Arokago.mp4': 'images/sample_Arokagomp4.jpg',
   'coco pop.mp4': 'images/sample_cocopopmp4.jpg',
   'Food.mp4': 'images/sample_Foodmp4.jpg',
@@ -116,10 +96,7 @@ const VIDEO_DRIVE_LINKS = {
   'Arokago.mp4': 'https://drive.google.com/file/d/1laOhtOfl7q4sdasFSEMPQ8zyP8cM8-GL/view?usp=sharing',
   'coco pop.mp4': 'https://drive.google.com/file/d/1MNf1PU9cVKe8wDkAt4dxd1PlWB-hNiIc/view?usp=sharing',
   'Food.mp4': 'https://drive.google.com/file/d/1pFPw8B64CCK_zFRJpwVj_cpo6a57n-4q/view?usp=sharing',
-  'มหานาค.mp4': 'https://drive.google.com/file/d/1RFvMFCkASRqmIdBM4v5Gt5Lly19QQuGj/view?usp=sharing',
-  'รีวิว.mp4': 'https://drive.google.com/file/d/1Kps7LLMhuo8HMPFna-vwD0UVeR0xcm7e/view?usp=sharing',
-  '0913.mp4': 'https://drive.google.com/file/d/1Kps7LLMhuo8HMPFna-vwD0UVeR0xcm7e/view?usp=sharing',
-  'ซับ2.mp4': 'https://drive.google.com/file/d/1pFPw8B64CCK_zFRJpwVj_cpo6a57n-4q/view?usp=sharing'
+  'มหานาค.mp4': 'https://drive.google.com/file/d/1RFvMFCkASRqmIdBM4v5Gt5Lly19QQuGj/view?usp=sharing'
 };
 
 const VIDEO_DRIVE_IDS = {
@@ -128,10 +105,7 @@ const VIDEO_DRIVE_IDS = {
   'Arokago.mp4': '1laOhtOfl7q4sdasFSEMPQ8zyP8cM8-GL',
   'coco pop.mp4': '1MNf1PU9cVKe8wDkAt4dxd1PlWB-hNiIc',
   'Food.mp4': '1pFPw8B64CCK_zFRJpwVj_cpo6a57n-4q',
-  'มหานาค.mp4': '1RFvMFCkASRqmIdBM4v5Gt5Lly19QQuGj',
-  'รีวิว.mp4': '1Kps7LLMhuo8HMPFna-vwD0UVeR0xcm7e',
-  '0913.mp4': '1Kps7LLMhuo8HMPFna-vwD0UVeR0xcm7e',
-  'ซับ2.mp4': '1pFPw8B64CCK_zFRJpwVj_cpo6a57n-4q'
+  'มหานาค.mp4': '1RFvMFCkASRqmIdBM4v5Gt5Lly19QQuGj'
 };
 
 // Format bytes to human readable string
@@ -153,9 +127,10 @@ app.get('/api/videos', (req, res) => {
 
     const files = fs.readdirSync(VIDEO_DIR);
     const videoExtensions = ['.mp4', '.mov', '.webm', '.mkv', '.avi'];
+    const EXCLUDED_FILES = ['รีวิว.mp4', '0913.mp4'];
 
     const videoList = files
-      .filter(file => videoExtensions.includes(path.extname(file).toLowerCase()))
+      .filter(file => videoExtensions.includes(path.extname(file).toLowerCase()) && !EXCLUDED_FILES.includes(file.toLowerCase()) && !EXCLUDED_FILES.includes(file))
       .map((file, index) => {
         const filePath = path.join(VIDEO_DIR, file);
         const stats = fs.statSync(filePath);
