@@ -16,6 +16,7 @@
 - 👤 **Dual Showcase System**: สลับระหว่างโมเดล 3D และภาพถ่ายทางการชุดสูท (จากแฟ้มผลงานหน้า 01) ได้ทันที
 - 📖 **9-Page Interactive PDF Flipbook**: จำลองการเปิดแฟ้มสะสมผลงาน (Portfolio) และเรซูเม่ (Resume) เสมือนจริง มีปุ่มลัดไปยังแต่ละหน้า พร้อมระบบดาวน์โหลดไฟล์ต้นฉบับ
 - 🎬 **Local HD Streaming Engine**: ระบบสตรีมมิ่งวิดีโอตัดต่อคุณภาพสูงผ่าน HTTP Range Requests เลื่อนดูไทม์ไลน์ได้ทันที พร้อมโรงภาพยนตร์จำลอง (Cinematic Theater Modal)
+- 📁 **Cloud Video Master Archive**: เชื่อมต่อคลังไฟล์วิดีโอต้นฉบับ Full HD / 4K บน [Google Drive Folder](https://drive.google.com/drive/folders/1rJUM3uc0SRMwIr89VknVdLfFYmTWIoGj?usp=sharing) ให้ผู้ว่าจ้างหรือฝ่ายบุคคลดาวน์โหลดและรับชมได้อย่างราบรื่น
 - 📐 **3D Project Deep Dive**: เจาะลึกเบื้องหลังโครงสร้างโมเดล 3D (75 ชิ้นส่วน, 414,232 โพลีกอน, 44 PBR Materials)
 
 ---

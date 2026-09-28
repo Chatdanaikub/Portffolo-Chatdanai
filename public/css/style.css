@@ -2311,6 +2311,51 @@ body {
   display: block;
 }
 
+.cinematic-drive-iframe {
+  width: 100%;
+  height: 58vh;
+  min-height: 380px;
+  border: none;
+  background: #000;
+  display: block;
+}
+
+.stream-source-switch {
+  display: inline-flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  padding: 2px;
+  gap: 2px;
+}
+
+.source-toggle-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  font-family: 'Prompt', sans-serif;
+  font-size: 0.74rem;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.source-toggle-btn:hover {
+  color: #fff;
+}
+
+.source-toggle-btn.active {
+  background: var(--accent-gradient);
+  color: #ffffff;
+  box-shadow: 0 2px 8px var(--accent-glow);
+}
+
 /* Big Play Overlay */
 .play-overlay {
   position: absolute;

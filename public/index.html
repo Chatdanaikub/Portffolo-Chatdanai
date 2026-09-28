@@ -805,9 +805,14 @@
           <h3 style="font-size: 1.5rem; font-weight: 700; color: #ffffff; margin-bottom: 8px;">
             🎬 วิดีโอสตรีมมิ่งในระบบ (Local HD Streaming Catalog)
           </h3>
-          <p style="font-size: 0.92rem; color: var(--text-muted); max-width: 600px; margin: 0 auto;">
+          <p style="font-size: 0.92rem; color: var(--text-muted); max-width: 600px; margin: 0 auto 16px;">
             วิดีโอตัดต่อพร้อมรับชมแบบสดๆ สตรีมมิ่งผ่านเทคโนโลยี HTTP Range Requests เลื่อนไทม์ไลน์ได้ทันที
           </p>
+          <div style="display:flex; justify-content:center; gap:12px; margin-bottom: 20px;">
+            <a href="https://drive.google.com/drive/folders/1rJUM3uc0SRMwIr89VknVdLfFYmTWIoGj?usp=sharing" target="_blank" rel="noopener" class="btn btn-secondary btn-sm" style="background: rgba(56, 189, 248, 0.12); border: 1px solid rgba(56, 189, 248, 0.4); color: #38bdf8; font-weight: 600; padding: 8px 18px; border-radius: 999px; text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">
+              <span>📁 เปิดดูคลังไฟล์วิดีโอ Full HD ทั้งหมดบน Google Drive ↗</span>
+            </a>
+          </div>
         </div>
 
         <div class="filter-tabs-wrapper">
@@ -1196,7 +1201,15 @@
           <span class="modal-badge" id="modalBadge">FEATURED</span>
           <h3 class="modal-video-title" id="modalVideoTitle">Video Title</h3>
         </div>
-        <div class="modal-header-actions">
+        <div class="modal-header-actions" style="display:flex; align-items:center; gap:10px;">
+          <div class="stream-source-switch" id="streamSourceSwitch">
+            <button class="source-toggle-btn active" id="btnSourceLocal" title="สตรีมจากเซิร์ฟเวอร์ในระบบ">
+              🖥️ Local HD
+            </button>
+            <button class="source-toggle-btn" id="btnSourceDrive" title="สตรีมสดผ่าน Google Drive Cloud">
+              ☁️ Drive Cloud
+            </button>
+          </div>
           <button class="modal-close-btn" id="modalCloseBtn" aria-label="ปิดหน้าต่าง">
             <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2">
               <line x1="18" y1="6" x2="6" y2="18"></line>
@@ -1214,6 +1227,16 @@
           playsinline 
           preload="metadata">
         </video>
+
+        <!-- Google Drive Cloud Stream Iframe -->
+        <iframe 
+          id="drivePlayerIframe" 
+          class="cinematic-drive-iframe" 
+          src="" 
+          allow="autoplay; fullscreen" 
+          allowfullscreen 
+          style="display:none; width:100%; height:56vh; min-height:360px; border:none; background:#000;">
+        </iframe>
 
         <!-- Big Play/Pause Overlay Animation -->
         <div class="play-overlay" id="playOverlay">
@@ -1329,6 +1352,12 @@
         </p>
 
         <div class="modal-actions-row">
+          <a id="modalDriveLink" href="https://drive.google.com/drive/folders/1rJUM3uc0SRMwIr89VknVdLfFYmTWIoGj?usp=sharing" target="_blank" rel="noopener" class="btn btn-secondary btn-sm" style="background: rgba(56, 189, 248, 0.15); border: 1px solid rgba(56, 189, 248, 0.45); color: #38bdf8; text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
+            </svg>
+            <span id="modalDriveLinkText">📁 เปิดดูคลิปนี้บน Google Drive ↗</span>
+          </a>
           <button class="btn btn-outline btn-sm" id="copyShareLinkBtn">
             <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
               <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>

@@ -13,6 +13,8 @@ const FALLBACK_VIDEOS = [
     id: 1,
     filename: 'รีวิว.mp4',
     streamUrl: '/api/stream/%E0%B8%A3%E0%B8%B5%E0%B8%A7%E0%B8%B4%E0%B8%A7.mp4',
+    driveUrl: 'https://drive.google.com/file/d/1Kps7LLMhuo8HMPFna-vwD0UVeR0xcm7e/view?usp=sharing',
+    driveId: '1Kps7LLMhuo8HMPFna-vwD0UVeR0xcm7e',
     poster: 'images/sample_Foodmp4.jpg',
     title: 'รีวิวร้านหมูจุ่มอาโม สาขาตลาดไท — Dynamic Food Review',
     category: 'motion',
@@ -27,6 +29,8 @@ const FALLBACK_VIDEOS = [
     id: 2,
     filename: 'Arokago.mp4',
     streamUrl: '/api/stream/Arokago.mp4',
+    driveUrl: 'https://drive.google.com/file/d/1laOhtOfl7q4sdasFSEMPQ8zyP8cM8-GL/view?usp=sharing',
+    driveId: '1laOhtOfl7q4sdasFSEMPQ8zyP8cM8-GL',
     poster: 'images/sample_Arokagomp4.jpg',
     title: 'ArokaGO — Medical & Wellness Tourism Platform',
     category: 'commercial',
@@ -41,6 +45,8 @@ const FALLBACK_VIDEOS = [
     id: 3,
     filename: 'coco pop.mp4',
     streamUrl: '/api/stream/coco%20pop.mp4',
+    driveUrl: 'https://drive.google.com/file/d/1MNf1PU9cVKe8wDkAt4dxd1PlWB-hNiIc/view?usp=sharing',
+    driveId: '1MNf1PU9cVKe8wDkAt4dxd1PlWB-hNiIc',
     poster: 'images/sample_cocopopmp4.jpg',
     title: 'COCO LOVE — Love Yourself Drink For Your Health',
     category: 'commercial',
@@ -55,6 +61,8 @@ const FALLBACK_VIDEOS = [
     id: 4,
     filename: 'Food.mp4',
     streamUrl: '/api/stream/Food.mp4',
+    driveUrl: 'https://drive.google.com/file/d/1pFPw8B64CCK_zFRJpwVj_cpo6a57n-4q/view?usp=sharing',
+    driveId: '1pFPw8B64CCK_zFRJpwVj_cpo6a57n-4q',
     poster: 'images/sample_Foodmp4.jpg',
     title: 'Food Content & Storytelling — จังหวะภาพ & ซับไตเติลแม่นยำ',
     category: 'subtitle',
@@ -69,6 +77,8 @@ const FALLBACK_VIDEOS = [
     id: 5,
     filename: 'มหานาค.mp4',
     streamUrl: '/api/stream/%E0%B8%A1%E0%B8%AB%E0%B8%B2%E0%B8%99%E0%B8%B2%E0%B8%84.mp4',
+    driveUrl: 'https://drive.google.com/file/d/1RFvMFCkASRqmIdBM4v5Gt5Lly19QQuGj/view?usp=sharing',
+    driveId: '1RFvMFCkASRqmIdBM4v5Gt5Lly19QQuGj',
     poster: 'images/work_mahanak.png',
     title: 'Nitade DPU "มหานาคผ่านเลนส์ จากรอย...สู่เรื่อง" — สารคดีสั้น & ซับไตเติล 2 ภาษา',
     category: 'cinematic',
@@ -83,6 +93,8 @@ const FALLBACK_VIDEOS = [
     id: 6,
     filename: 'animation.MP4',
     streamUrl: '/api/stream/animation.MP4',
+    driveUrl: 'https://drive.google.com/file/d/17i0jwEYNXZrGw-lSxlCR93Vi8j3FoM4y/view?usp=sharing',
+    driveId: '17i0jwEYNXZrGw-lSxlCR93Vi8j3FoM4y',
     poster: 'images/sample_animationMP4.jpg',
     title: 'Sweet Treats & Food Truck — 2D Motion Animation (60 FPS)',
     category: 'motion',
@@ -201,9 +213,12 @@ function renderVideoCards(filterCategory = 'all') {
             </svg>
             <span>รับชมในโรงหนัง</span>
           </button>
-          <span class="tool-badge" style="background:transparent; border-color:var(--accent-primary); color:var(--accent-primary);">
-            ${video.highlight || 'Mastered'}
-          </span>
+          <a href="${video.driveUrl || 'https://drive.google.com/drive/folders/1rJUM3uc0SRMwIr89VknVdLfFYmTWIoGj?usp=sharing'}" target="_blank" rel="noopener" class="card-drive-btn" title="เปิดดูคลิปนี้แบบ Full HD บน Google Drive" style="text-decoration:none; display:inline-flex; align-items:center; gap:5px; font-size:0.78rem; font-weight:600; padding:6px 12px; border-radius:8px; background:rgba(56,189,248,0.12); border:1px solid rgba(56,189,248,0.35); color:#38bdf8;">
+            <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2">
+              <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
+            </svg>
+            <span>Drive ↗</span>
+          </a>
         </div>
       </div>
     `;

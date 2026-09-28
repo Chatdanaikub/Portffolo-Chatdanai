@@ -1,28 +1,35 @@
-# Dependencies
-node_modules/
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-
-# Portable tools & build artifacts
-.tools/
-dist/
-build/
-*.exe
-*.pkg
-*.spec
-__pycache__/
-
-# Large video files (exceeds GitHub's 100MB limit - 2.5GB+ total)
-ผลงานคลิปที่เคยทำ/
+# Large Video Files & Media folders
+/ผลงานคลิปที่เคยทำ/
 *.mp4
 *.MP4
+*.mov
+*.mkv
+*.avi
+*.wmv
 
-# Duplicate root model (already tracked in public/models/bedroom.glb)
+# Dependencies
+/node_modules/
+
+# Build artifacts & Executables
+/dist/
+/build/
+/Portfolio_Launcher.exe
+/Portfolio_Launcher.pkg
+/*.spec
+
+# External tools & Blender binaries
+/.tools/
+*.pdb
+*.blend1
 /bedroom.glb
 
-# Logs & temp files
-*.log
+# System & IDE files
 .DS_Store
 Thumbs.db
 desktop.ini
+.vscode/
+.idea/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*

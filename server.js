@@ -109,6 +109,31 @@ const VIDEO_POSTERS = {
   'ซับ2.mp4': 'images/sample_Foodmp4.jpg'
 };
 
+// Google Drive Master Direct File Links & Embed IDs
+const VIDEO_DRIVE_LINKS = {
+  'animation.mp4': 'https://drive.google.com/file/d/17i0jwEYNXZrGw-lSxlCR93Vi8j3FoM4y/view?usp=sharing',
+  'animation.MP4': 'https://drive.google.com/file/d/17i0jwEYNXZrGw-lSxlCR93Vi8j3FoM4y/view?usp=sharing',
+  'Arokago.mp4': 'https://drive.google.com/file/d/1laOhtOfl7q4sdasFSEMPQ8zyP8cM8-GL/view?usp=sharing',
+  'coco pop.mp4': 'https://drive.google.com/file/d/1MNf1PU9cVKe8wDkAt4dxd1PlWB-hNiIc/view?usp=sharing',
+  'Food.mp4': 'https://drive.google.com/file/d/1pFPw8B64CCK_zFRJpwVj_cpo6a57n-4q/view?usp=sharing',
+  'มหานาค.mp4': 'https://drive.google.com/file/d/1RFvMFCkASRqmIdBM4v5Gt5Lly19QQuGj/view?usp=sharing',
+  'รีวิว.mp4': 'https://drive.google.com/file/d/1Kps7LLMhuo8HMPFna-vwD0UVeR0xcm7e/view?usp=sharing',
+  '0913.mp4': 'https://drive.google.com/file/d/1Kps7LLMhuo8HMPFna-vwD0UVeR0xcm7e/view?usp=sharing',
+  'ซับ2.mp4': 'https://drive.google.com/file/d/1pFPw8B64CCK_zFRJpwVj_cpo6a57n-4q/view?usp=sharing'
+};
+
+const VIDEO_DRIVE_IDS = {
+  'animation.mp4': '17i0jwEYNXZrGw-lSxlCR93Vi8j3FoM4y',
+  'animation.MP4': '17i0jwEYNXZrGw-lSxlCR93Vi8j3FoM4y',
+  'Arokago.mp4': '1laOhtOfl7q4sdasFSEMPQ8zyP8cM8-GL',
+  'coco pop.mp4': '1MNf1PU9cVKe8wDkAt4dxd1PlWB-hNiIc',
+  'Food.mp4': '1pFPw8B64CCK_zFRJpwVj_cpo6a57n-4q',
+  'มหานาค.mp4': '1RFvMFCkASRqmIdBM4v5Gt5Lly19QQuGj',
+  'รีวิว.mp4': '1Kps7LLMhuo8HMPFna-vwD0UVeR0xcm7e',
+  '0913.mp4': '1Kps7LLMhuo8HMPFna-vwD0UVeR0xcm7e',
+  'ซับ2.mp4': '1pFPw8B64CCK_zFRJpwVj_cpo6a57n-4q'
+};
+
 // Format bytes to human readable string
 function formatBytes(bytes, decimals = 1) {
   if (bytes === 0) return '0 Bytes';
@@ -151,6 +176,8 @@ app.get('/api/videos', (req, res) => {
           filename: file,
           encodedFilename: encodeURIComponent(file),
           streamUrl: `/api/stream/${encodeURIComponent(file)}`,
+          driveUrl: VIDEO_DRIVE_LINKS[file] || VIDEO_DRIVE_LINKS[file.toLowerCase()] || 'https://drive.google.com/drive/folders/1rJUM3uc0SRMwIr89VknVdLfFYmTWIoGj?usp=sharing',
+          driveId: VIDEO_DRIVE_IDS[file] || VIDEO_DRIVE_IDS[file.toLowerCase()] || '',
           poster: poster,
           title: preset.title,
           category: preset.category,

@@ -42,8 +42,49 @@ const TheaterPlayer = (function () {
   const fullscreenBtn = document.getElementById('ctrlFullscreenBtn');
   const closeBtn = document.getElementById('modalCloseBtn');
   const backdrop = document.getElementById('modalBackdrop');
+  const driveIframe = document.getElementById('drivePlayerIframe');
+  const btnSourceLocal = document.getElementById('btnSourceLocal');
+  const btnSourceDrive = document.getElementById('btnSourceDrive');
+  const driveLink = document.getElementById('modalDriveLink');
+  const driveLinkText = document.getElementById('modalDriveLinkText');
+  const playerControls = document.getElementById('playerControls');
 
   let isScrubbing = false;
+  let currentSourceMode = 'local';
+
+  function setSourceMode(mode) {
+    currentSourceMode = mode;
+    if (btnSourceLocal) btnSourceLocal.classList.toggle('active', mode === 'local');
+    if (btnSourceDrive) btnSourceDrive.classList.toggle('active', mode === 'drive');
+
+    if (mode === 'drive') {
+      if (video) {
+        video.pause();
+        video.style.display = 'none';
+      }
+      if (playOverlay) playOverlay.style.display = 'none';
+      if (playerControls) playerControls.style.display = 'none';
+
+      if (driveIframe && activeVideoData && activeVideoData.driveId) {
+        driveIframe.src = `https://drive.google.com/file/d/${activeVideoData.driveId}/preview`;
+        driveIframe.style.display = 'block';
+      }
+      showToast('☁️ กำลังสตรีมมิ่งผ่าน Google Drive Cloud Player');
+    } else {
+      if (driveIframe) {
+        driveIframe.src = '';
+        driveIframe.style.display = 'none';
+      }
+      if (video) {
+        video.style.display = 'block';
+        video.play().catch(() => {});
+      }
+      if (playOverlay) playOverlay.style.display = 'flex';
+      if (playerControls) playerControls.style.display = 'block';
+      showToast('🖥️ สลับเป็นสตรีมมิ่งจาก Local Server');
+    }
+    if (typeof SFX !== 'undefined') SFX.playClick();
+  }
 
   function togglePlay() {
     if (!video) return;
@@ -315,6 +356,20 @@ const TheaterPlayer = (function () {
         });
       });
     }
+
+    // Source Switcher Buttons
+    if (btnSourceLocal) btnSourceLocal.addEventListener('click', () => setSourceMode('local'));
+    if (btnSourceDrive) btnSourceDrive.addEventListener('click', () => setSourceMode('drive'));
+
+    // Video error fallback to Drive
+    if (video) {
+      video.addEventListener('error', () => {
+        if (activeVideoData && activeVideoData.driveId && currentSourceMode === 'local') {
+          console.log('Local stream failed/not found, falling back to Google Drive stream...');
+          setSourceMode('drive');
+        }
+      });
+    }
   }
 
   document.addEventListener('DOMContentLoaded', setupEvents);
@@ -348,6 +403,26 @@ const TheaterPlayer = (function () {
         });
       }
 
+      // Update Google Drive Direct Link button
+      if (driveLink) {
+        driveLink.href = videoData.driveUrl || 'https://drive.google.com/drive/folders/1rJUM3uc0SRMwIr89VknVdLfFYmTWIoGj?usp=sharing';
+      }
+      if (driveLinkText) {
+        driveLinkText.textContent = videoData.driveUrl ? '📁 เปิดดูคลิปนี้บน Google Drive ↗' : '📁 ดูคลังคลิปต้นฉบับบน Google Drive ↗';
+      }
+
+      // Initialize source view: start with local or auto-drive
+      currentSourceMode = 'local';
+      if (btnSourceLocal) btnSourceLocal.classList.add('active');
+      if (btnSourceDrive) btnSourceDrive.classList.remove('active');
+      if (driveIframe) {
+        driveIframe.src = '';
+        driveIframe.style.display = 'none';
+      }
+      if (video) video.style.display = 'block';
+      if (playOverlay) playOverlay.style.display = 'flex';
+      if (playerControls) playerControls.style.display = 'block';
+
       // Load Video Source via Express HTTP Range Stream
       video.src = videoData.streamUrl;
       video.load();
@@ -374,6 +449,10 @@ const TheaterPlayer = (function () {
       if (!modal) return;
       video.pause();
       video.src = '';
+      if (driveIframe) {
+        driveIframe.src = '';
+        driveIframe.style.display = 'none';
+      }
       modal.classList.remove('active');
       modal.setAttribute('aria-hidden', 'true');
       document.body.style.overflow = '';
